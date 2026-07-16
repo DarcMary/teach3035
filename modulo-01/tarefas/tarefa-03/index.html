@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevBlog - Layout Responsivo (Grid & Flexbox)</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <div class="header-content">
+            <h1>&lt;DevBlog /&gt;</h1>
+
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Artigos</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+
+        <div class="hero-title">
+            <h2>Últimas Postagens</h2>
+            <p>Acompanhe os artigos de tecnologia, desenvolvimento e boas práticas de código.</p>
+        </div>
+
+        <div class="posts-grid">
+
+            <article class="post-card">
+                <img
+                    src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&auto=format&fit=crop"
+                    alt="Código CSS"
+                    class="post-image">
+
+                <div class="post-content">
+                    <span class="post-tag">CSS Grid & Flexbox</span>
+
+                    <h3 class="post-title">
+                        Dominando CSS Grid e Flexbox no mesmo projeto
+                    </h3>
+
+                    <p class="post-excerpt">
+                        Entenda quando utilizar CSS Grid para estruturas de layout
+                        bidimensionais e Flexbox para componentes e alinhamentos
+                        unidimensionais.
+                    </p>
+                </div>
+
+                <div class="post-footer">
+                    <div class="author-info">
+                        <div class="author-avatar">DV</div>
+                        <span class="author-name">Dev User</span>
+                    </div>
+
+                    <span class="post-date">16 Jul, 2026</span>
+                </div>
+            </article>
+
+            <article class="post-card">
+                <img
+                    src="https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=600&auto=format&fit=crop"
+                    alt="React JS"
+                    class="post-image">
+
+                <div class="post-content">
+                    <span class="post-tag">React</span>
+
+                    <h3 class="post-title">
+                        Boas práticas na criação de componentes reutilizáveis
+                    </h3>
+
+                    <p class="post-excerpt">
+                        Aprenda a estruturar componentes limpos, focados em
+                        responsabilidade única e fáceis de manter no ecossistema React.
+                    </p>
+                </div>
+
+                <div class="post-footer">
+                    <div class="author-info">
+                        <div class="author-avatar">DV</div>
+                        <span class="author-name">Dev User</span>
+                    </div>
+
+                    <span class="post-date">14 Jul, 2026</span>
+                </div>
+            </article>
+
+            <article class="post-card">
+                <img
+                    src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=600&auto=format&fit=crop"
+                    alt="Desenvolvimento Web"
+                    class="post-image">
+
+                <div class="post-content">
+                    <span class="post-tag">Arquitetura</span>
+
+                    <h3 class="post-title">
+                        Como organizar repositórios de estudos no GitHub
+                    </h3>
+
+                    <p class="post-excerpt">
+                        Dicas essenciais de organização de código, commits semânticos e
+                        documentação via README para valorizar seu portfólio.
+                    </p>
+                </div>
+
+                <div class="post-footer">
+                    <div class="author-info">
+                        <div class="author-avatar">DV</div>
+                        <span class="author-name">Dev User</span>
+                    </div>
+
+                    <span class="post-date">10 Jul, 2026</span>
+                </div>
+            </article>
+
+        </div>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 DevBlog. Desenvolvido para a Tarefa 3 do Módulo.</p>
+    </footer>
+
+</body>
+</html>
