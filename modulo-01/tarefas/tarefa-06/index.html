@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskFlow - Gerenciador de Tarefas</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <main class="app-container">
+
+        <header class="app-header">
+            <h1>TaskFlow</h1>
+            <p>Organize suas tarefas e acompanhe seu progresso.</p>
+        </header>
+
+        <section class="task-form-section" aria-label="Adicionar nova tarefa">
+
+            <form id="task-form" class="input-group">
+
+                <label for="task-input" class="sr-only">
+                    Nome da tarefa
+                </label>
+
+                <input
+                    id="task-input"
+                    type="text"
+                    placeholder="Digite uma nova tarefa..."
+                    autocomplete="off"
+                >
+
+                <button
+                    id="add-btn"
+                    type="submit"
+                    class="btn btn-primary"
+                >
+                    Adicionar
+                </button>
+
+            </form>
+
+        </section>
+
+
+        <nav class="filters" aria-label="Filtros de tarefas">
+
+            <button
+                id="btn-todas"
+                class="btn btn-filter active"
+                type="button"
+            >
+                Todas
+            </button>
+
+            <button
+                id="btn-pendentes"
+                class="btn btn-filter"
+                type="button"
+            >
+                Pendentes
+            </button>
+
+        </nav>
+
+
+        <section class="tasks-section" aria-label="Lista de tarefas">
+
+            <ul id="task-list" class="task-list"></ul>
+
+            <p id="empty-message" class="empty-message">
+                Nenhuma tarefa cadastrada.
+            </p>
+
+        </section>
+
+    </main>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
