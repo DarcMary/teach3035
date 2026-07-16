@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="PetCare Manager — Sistema de gerenciamento de agendamentos e e-commerce para petshops.">
+
+  <title>PetCare Manager | Premium</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <script src="https://unpkg.com/@phosphor-icons/web" defer></script>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="bg-shape shape-1" aria-hidden="true"></div>
+  <div class="bg-shape shape-2" aria-hidden="true"></div>
+  <div class="bg-shape shape-3" aria-hidden="true"></div>
+
+  <header class="navbar glass">
+    <div class="logo-container" aria-label="PetCare Manager">
+      <div class="logo-icon-bg" aria-hidden="true">
+        <i class="ph-fill ph-paw-print"></i>
+      </div>
+      <span class="logo-text">PetCare<span class="text-gradient">Manager</span></span>
+    </div>
+
+    <nav aria-label="Navegação principal">
+      <ul class="nav-links" role="list">
+        <li>
+          <button class="nav-btn active" data-target="home-section" aria-current="page">
+            <i class="ph ph-house" aria-hidden="true"></i>
+            <span>Início &amp; Cadastro</span>
+          </button>
+        </li>
+        <li>
+          <button class="nav-btn" data-target="clients-section">
+            <i class="ph ph-users" aria-hidden="true"></i>
+            <span>Clientes</span>
+          </button>
+        </li>
+        <li>
+          <button class="nav-btn" data-target="shop-section">
+            <i class="ph ph-storefront" aria-hidden="true"></i>
+            <span>E-commerce</span>
+          </button>
+        </li>
+        <li>
+          <button class="nav-btn" id="open-cart-btn" aria-label="Abrir carrinho de compras" style="position:relative;">
+            <i class="ph-bold ph-shopping-cart" aria-hidden="true"></i>
+            <span class="cart-badge" id="cart-badge" aria-live="polite" aria-atomic="true">0</span>
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="main-content">
+
+    <section id="home-section" class="tab-content active fade-in" aria-labelledby="home-heading">
+      <div class="hero-card glass">
+        <div class="hero-content">
+          <span class="badge">Gestão Premium</span>
+          <h2 id="home-heading">O melhor para o seu Pet</h2>
+          <p>Uma solução completa, elegante e intuitiva para o gerenciamento do seu petshop. Organize atendimentos e ofereça os melhores produtos em um só lugar.</p>
+        </div>
+        <div class="hero-image">
+          <img
+            src="https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?q=80&w=2060&auto=format&fit=crop"
+            alt="Cachorro sorrindo em petshop"
+            width="800"
+            height="450"
+            loading="eager"
+            fetchpriority="high"
+          >
+        </div>
+      </div>
+
+      <div class="form-container glass">
+        <div class="section-title">
+          <i class="ph-fill ph-calendar-plus" aria-hidden="true"></i>
+          <h3>Novo Atendimento</h3>
+        </div>
+
+        <form id="client-form" novalidate aria-label="Formulário de cadastro de atendimento">
+          <div class="form-grid">
+
+            <div class="form-section-title">Dados do Tutor</div>
+
+            <div class="form-group">
+              <label for="tutorName">Nome Completo</label>
+              <div class="input-wrapper">
+                <i class="ph ph-user" aria-hidden="true"></i>
+                <input
+                  type="text"
+                  id="tutorName"
+                  name="tutorName"
+                  autocomplete="name"
+                  required
+                  minlength="3"
+                  placeholder="Ex: Maria Silva"
+                >
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="tutorPhone">Telefone</label>
+              <div class="input-wrapper">
+                <i class="ph ph-phone" aria-hidden="true"></i>
+                <input
+                  type="tel"
+                  id="tutorPhone"
+                  name="tutorPhone"
+                  autocomplete="tel"
+                  required
+                  placeholder="(00) 00000-0000"
+                  inputmode="numeric"
+                >
+              </div>
+            </div>
+
+            <div class="form-group full-width">
+              <label for="tutorAddress">Endereço Completo</label>
+              <div class="input-wrapper">
+                <i class="ph ph-map-pin" aria-hidden="true"></i>
+                <input
+                  type="text"
+                  id="tutorAddress"
+                  name="tutorAddress"
+                  autocomplete="street-address"
+                  required
+                  minlength="5"
+                  placeholder="Rua, Número, Bairro"
+                >
+              </div>
+            </div>
+
+            <div class="form-section-title mt-4">Dados do Pet &amp; Atendimento</div>
+
+            <div class="form-group">
+              <label for="serviceDate">Data do Atendimento</label>
+              <div class="input-wrapper">
+                <i class="ph ph-calendar" aria-hidden="true"></i>
+                <input
+                  type="date"
+                  id="serviceDate"
+                  name="serviceDate"
+                  required
+                >
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="petName">Nome do Animal</label>
+              <div class="input-wrapper">
+                <i class="ph ph-paw-print" aria-hidden="true"></i>
+                <input
+                  type="text"
+                  id="petName"
+                  name="petName"
+                  required
+                  minlength="2"
+                  placeholder="Ex: Rex"
+                >
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="petAge">Idade do Animal</label>
+              <div class="input-wrapper">
+                <i class="ph ph-clock" aria-hidden="true"></i>
+                <input
+                  type="text"
+                  id="petAge"
+                  name="petAge"
+                  required
+                  placeholder="Ex: 3 anos"
+                >
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="petSize">Porte do Animal</label>
+              <div class="input-wrapper">
+                <i class="ph ph-scales" aria-hidden="true"></i>
+                <select id="petSize" name="petSize" required>
+                  <option value="" disabled selected>Selecione o porte</option>
+                  <option value="Pequeno">Pequeno</option>
+                  <option value="Médio">Médio</option>
+                  <option value="Grande">Grande</option>
+                </select>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="form-actions">
+            <button type="button" id="form-cancel-btn" class="btn-secondary hidden">
+              <span>Cancelar Edição</span>
+              <i class="ph-bold ph-x" aria-hidden="true"></i>
+            </button>
+            <button type="submit" class="btn-primary">
+              <span id="form-submit-text">Agendar Atendimento</span>
+              <i class="ph-bold ph-arrow-right" aria-hidden="true"></i>
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <section id="clients-section" class="tab-content" aria-labelledby="clients-heading">
+      <div class="section-header center">
+        <span class="badge">Nossa Base</span>
+        <h2 id="clients-heading">Clientes Cadastrados</h2>
+        <p>Gerencie seus agendamentos. Clique em um cartão para visualizar os detalhes completos.</p>
+      </div>
+      <div id="clients-grid" class="cards-grid" aria-live="polite"></div>
+    </section>
+
+    <section id="shop-section" class="tab-content" aria-labelledby="shop-heading">
+      <div class="section-header center">
+        <span class="badge">Pet Store</span>
+        <h2 id="shop-heading">E-commerce PetCare</h2>
+        <p>Os melhores produtos premium para cães e gatos, selecionados com cuidado.</p>
+      </div>
+      <div id="products-grid" class="products-grid"></div>
+    </section>
+
+  </main>
+
+  <div
+    id="toast-notification"
+    class="toast glass"
+    role="status"
+    aria-live="polite"
+    aria-atomic="true"
+  >
+    <i class="ph-fill ph-check-circle toast-icon" aria-hidden="true"></i>
+    <div class="toast-content">
+      <h4>Sucesso!</h4>
+      <p id="toast-message">Operação realizada com sucesso.</p>
+    </div>
+  </div>
+
+  <div
+    id="client-modal"
+    class="modal-backdrop"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="modal-pet-name"
+    aria-hidden="true"
+  >
+    <div class="modal-content glass">
+      <button id="close-modal" class="modal-close" aria-label="Fechar detalhes do atendimento">
+        <i class="ph ph-x" aria-hidden="true"></i>
+      </button>
+
+      <div class="modal-header">
+        <div class="modal-avatar" aria-hidden="true">
+          <i class="ph-fill ph-paw-print"></i>
+        </div>
+        <div>
+          <h3 id="modal-pet-name"></h3>
+          <span class="modal-subtitle">Atendimento Agendado</span>
+        </div>
+      </div>
+
+      <div class="modal-body">
+        <div class="detail-group">
+          <i class="ph-fill ph-user" aria-hidden="true"></i>
+          <div>
+            <span class="label">Tutor</span>
+            <p id="modal-tutor-name"></p>
+          </div>
+        </div>
+        <div class="detail-group">
+          <i class="ph-fill ph-phone" aria-hidden="true"></i>
+          <div>
+            <span class="label">Telefone</span>
+            <p id="modal-tutor-phone"></p>
+          </div>
+        </div>
+        <div class="detail-group">
+          <i class="ph-fill ph-map-pin" aria-hidden="true"></i>
+          <div>
+            <span class="label">Endereço</span>
+            <p id="modal-tutor-address"></p>
+          </div>
+        </div>
+
+        <div class="detail-separator" role="separator"></div>
+
+        <div class="detail-group">
+          <i class="ph-fill ph-calendar" aria-hidden="true"></i>
+          <div>
+            <span class="label">Data de Atendimento</span>
+            <p id="modal-service-date"></p>
+          </div>
+        </div>
+
+        <div class="detail-row">
+          <div class="detail-group">
+            <i class="ph-fill ph-clock" aria-hidden="true"></i>
+            <div>
+              <span class="label">Idade</span>
+              <p id="modal-pet-age"></p>
+            </div>
+          </div>
+          <div class="detail-group">
+            <i class="ph-fill ph-scales" aria-hidden="true"></i>
+            <div>
+              <span class="label">Porte</span>
+              <p id="modal-pet-size"></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-actions">
+          <button id="modal-delete-btn" class="btn-danger" aria-label="Excluir este atendimento">
+            <i class="ph-bold ph-trash" aria-hidden="true"></i>
+            Excluir
+          </button>
+          <button id="modal-edit-btn" class="btn-primary" aria-label="Editar este atendimento">
+            <i class="ph-bold ph-pencil-simple" aria-hidden="true"></i>
+            Editar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <aside
+    id="cart-sidebar"
+    class="cart-sidebar"
+    aria-label="Carrinho de compras"
+    aria-hidden="true"
+  >
+    <div class="cart-header">
+      <h3>
+        <i class="ph-bold ph-shopping-cart" aria-hidden="true"></i>
+        Seu Carrinho
+      </h3>
+      <button id="close-cart-btn" class="modal-close" aria-label="Fechar carrinho">
+        <i class="ph ph-x" aria-hidden="true"></i>
+      </button>
+    </div>
+
+    <div class="cart-items" id="cart-items-container" aria-live="polite"></div>
+
+    <div class="cart-footer">
+      <div class="cart-total">
+        <span>Total:</span>
+        <span id="cart-total-price">R$ 0,00</span>
+      </div>
+      <button id="checkout-btn" class="btn-primary btn-checkout">
+        Finalizar Compra
+        <i class="ph-bold ph-check" aria-hidden="true"></i>
+      </button>
+    </div>
+  </aside>
+
+  <div id="cart-backdrop" class="cart-backdrop" aria-hidden="true"></div>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
