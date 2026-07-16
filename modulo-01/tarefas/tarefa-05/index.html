@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Web</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <main class="calculator-container">
+
+        <header class="calculator-header">
+            <h1>Calculadora Web</h1>
+        </header>
+
+        <section class="display" aria-label="Visor da calculadora">
+            <div id="previous-op" class="previous-op"></div>
+            <div id="current-op" class="current-op">0</div>
+        </section>
+
+        <section class="buttons-grid">
+
+            <button id="clear" class="btn btn-action" aria-label="Limpar">C</button>
+            <button id="delete" class="btn btn-action" aria-label="Apagar">DEL</button>
+            <button class="btn btn-operator" data-op="/" aria-label="Dividir">÷</button>
+            <button class="btn btn-operator" data-op="*" aria-label="Multiplicar">×</button>
+
+            <button class="btn btn-number">7</button>
+            <button class="btn btn-number">8</button>
+            <button class="btn btn-number">9</button>
+            <button class="btn btn-operator" data-op="-">−</button>
+
+            <button class="btn btn-number">4</button>
+            <button class="btn btn-number">5</button>
+            <button class="btn btn-number">6</button>
+            <button class="btn btn-operator" data-op="+">+</button>
+
+            <button class="btn btn-number">1</button>
+            <button class="btn btn-number">2</button>
+            <button class="btn btn-number">3</button>
+
+            <button id="equals" class="btn btn-equals">=</button>
+
+            <button class="btn btn-number zero-btn">0</button>
+            <button class="btn btn-number">.</button>
+
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
