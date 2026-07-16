@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarefa 01 - Estrutura Básica e Mídia</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <div class="container header-content">
+            <h1>Meu Portal de Conteúdo</h1>
+
+            <nav>
+                <ul>
+                    <li><a href="#sobre">Sobre</a></li>
+                    <li><a href="#artigo">Artigo</a></li>
+                    <li><a href="#video-section">Vídeo</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <section id="sobre">
+            <h2>Sobre o Projeto</h2>
+            <p>
+                Esta página foi desenvolvida como parte da primeira tarefa do módulo,
+                aplicando conceitos de HTML5, estrutura semântica, navegação por âncoras
+                e incorporação de mídias externas.
+            </p>
+        </section>
+
+        <section id="artigo">
+            <h2>Desenvolvimento Web Moderno</h2>
+
+            <p>
+                O uso correto das tags semânticas como
+                <code>&lt;header&gt;</code>,
+                <code>&lt;main&gt;</code>,
+                <code>&lt;section&gt;</code> e
+                <code>&lt;footer&gt;</code>
+                melhora a organização do código, contribui para a acessibilidade e favorece
+                o SEO das aplicações web.
+            </p>
+
+            <p>
+                Além disso, recursos nativos do HTML5 permitem incorporar vídeos,
+                áudios e outros conteúdos multimídia de forma simples e eficiente,
+                proporcionando uma melhor experiência ao usuário.
+            </p>
+        </section>
+
+        <section id="video-section">
+            <h2>Vídeo Demonstrativo</h2>
+
+            <p>
+                O vídeo abaixo apresenta uma demonstração relacionada ao conteúdo estudado.
+            </p>
+
+            <div class="video-container">
+                <iframe
+                    src="https://www.youtube.com/embed/K4Np0u8Qiog"
+                    title="Vídeo Demonstrativo"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 • Desenvolvido por D'arc Mary</p>
+    </footer>
+
+</body>
+</html>
