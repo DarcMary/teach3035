@@ -40,7 +40,7 @@ const isDateInPast = (value) => {
 
 const RULES = [
   { field: 'tutorName',    test: (v) => v.trim().length >= VALIDATION.TUTOR_NAME_MIN,         message: VALIDATION.MESSAGES.tutorName    },
-  { field: 'tutorPhone',   test: (v) => v.trim().length >= VALIDATION.PHONE_FORMATTED_LENGTH,  message: VALIDATION.MESSAGES.tutorPhone   },
+  { field: 'tutorPhone',   test: (v) => { const d = v.replace(/\D/g, '').length; return d >= VALIDATION.PHONE_DIGITS_MIN && d <= VALIDATION.PHONE_DIGITS_MAX; }, message: VALIDATION.MESSAGES.tutorPhone   },
   { field: 'tutorAddress', test: (v) => v.trim().length >= VALIDATION.TUTOR_ADDRESS_MIN,       message: VALIDATION.MESSAGES.tutorAddress },
   { field: 'serviceDate',  test: (v) => Boolean(v),                                            message: VALIDATION.MESSAGES.serviceDate  },
   { field: 'serviceDate',  test: (v) => !isDateInPast(v), condition: (v) => Boolean(v),        message: VALIDATION.MESSAGES.servicePast  },

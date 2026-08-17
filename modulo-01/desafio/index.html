@@ -32,19 +32,19 @@
     <nav aria-label="Navegação principal">
       <ul class="nav-links" role="list">
         <li>
-          <button class="nav-btn active" data-target="home-section" aria-current="page">
+          <button class="nav-btn active" data-target="home-section" aria-current="page" aria-label="Início e Cadastro">
             <i class="ph ph-house" aria-hidden="true"></i>
             <span>Início &amp; Cadastro</span>
           </button>
         </li>
         <li>
-          <button class="nav-btn" data-target="clients-section">
+          <button class="nav-btn" data-target="clients-section" aria-label="Clientes">
             <i class="ph ph-users" aria-hidden="true"></i>
             <span>Clientes</span>
           </button>
         </li>
         <li>
-          <button class="nav-btn" data-target="shop-section">
+          <button class="nav-btn" data-target="shop-section" aria-label="E-commerce">
             <i class="ph ph-storefront" aria-hidden="true"></i>
             <span>E-commerce</span>
           </button>
@@ -277,6 +277,7 @@
             <p id="modal-tutor-name"></p>
           </div>
         </div>
+
         <div class="detail-group">
           <i class="ph-fill ph-phone" aria-hidden="true"></i>
           <div>
@@ -284,6 +285,7 @@
             <p id="modal-tutor-phone"></p>
           </div>
         </div>
+
         <div class="detail-group">
           <i class="ph-fill ph-map-pin" aria-hidden="true"></i>
           <div>
@@ -315,20 +317,20 @@
             <div>
               <span class="label">Porte</span>
               <p id="modal-pet-size"></p>
+            </div>
           </div>
         </div>
       </div>
 
       <div class="modal-actions">
-          <button id="modal-delete-btn" class="btn-danger" aria-label="Excluir este atendimento">
-            <i class="ph-bold ph-trash" aria-hidden="true"></i>
-            Excluir
-          </button>
-          <button id="modal-edit-btn" class="btn-primary" aria-label="Editar este atendimento">
-            <i class="ph-bold ph-pencil-simple" aria-hidden="true"></i>
-            Editar
-          </button>
-        </div>
+        <button id="modal-delete-btn" class="btn-danger" aria-label="Excluir este atendimento">
+          <i class="ph-bold ph-trash" aria-hidden="true"></i>
+          Excluir
+        </button>
+        <button id="modal-edit-btn" class="btn-primary" aria-label="Editar este atendimento">
+          <i class="ph-bold ph-pencil-simple" aria-hidden="true"></i>
+          Editar
+        </button>
       </div>
     </div>
   </div>

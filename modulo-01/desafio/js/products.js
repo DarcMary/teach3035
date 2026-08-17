@@ -36,6 +36,7 @@ export const Products = Object.freeze({
   render() {
     const grid = document.querySelector(SELECTORS.PRODUCTS_GRID);
     if (!grid) return;
+    grid.innerHTML = '';
     const fragment = document.createDocumentFragment();
     PRODUCTS.forEach((product, i) => fragment.appendChild(createProductCard(product, i)));
     grid.appendChild(fragment);

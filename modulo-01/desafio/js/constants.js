@@ -17,10 +17,11 @@ export const PRODUCTS = Object.freeze([
 ]);
 
 export const VALIDATION = Object.freeze({
-  TUTOR_NAME_MIN:         3,
-  TUTOR_ADDRESS_MIN:      5,
-  PET_NAME_MIN:           2,
-  PHONE_FORMATTED_LENGTH: 14,
+  TUTOR_NAME_MIN:    3,
+  TUTOR_ADDRESS_MIN: 5,
+  PET_NAME_MIN:      2,
+  PHONE_DIGITS_MIN:  10,
+  PHONE_DIGITS_MAX:  11,
   MESSAGES: Object.freeze({
     tutorName:    'Nome deve ter pelo menos 3 caracteres.',
     tutorPhone:   'Informe um telefone válido. Ex: (00) 00000-0000.',
