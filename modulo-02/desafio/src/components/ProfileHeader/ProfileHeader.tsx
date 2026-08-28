@@ -1,4 +1,5 @@
 import type { GitHubUser } from '../../types/github'
+import styles from './ProfileHeader.module.css'
 
 type ProfileHeaderProps = {
   user: GitHubUser
@@ -8,11 +9,12 @@ export function ProfileHeader({ user }: ProfileHeaderProps) {
   const displayName = user.name ?? user.login
 
   return (
-    <header>
-      <img src={user.avatar_url} alt={`Avatar for ${displayName}`} />
+    <header className={styles.header}>
+      <img className={styles.avatar} src={user.avatar_url} alt={`Avatar for ${displayName}`} />
       <div>
-        <h1>{displayName}</h1>
-        <p>{user.bio ?? 'Bio not provided'}</p>
+        <p className={styles.label}>Profile information</p>
+        <h1 className={styles.name}>{displayName}</h1>
+        <p className={styles.bio}>{user.bio ?? 'Bio not provided'}</p>
       </div>
     </header>
   )

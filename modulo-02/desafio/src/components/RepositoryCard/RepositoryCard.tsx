@@ -1,4 +1,5 @@
 import type { GitHubRepository } from '../../types/github'
+import styles from './RepositoryCard.module.css'
 
 type RepositoryCardProps = {
   repository: GitHubRepository
@@ -7,14 +8,15 @@ type RepositoryCardProps = {
 
 export function RepositoryCard({ repository, onSelect }: RepositoryCardProps) {
   return (
-    <article>
+    <article className={styles.card}>
       <button
         type="button"
         onClick={() => onSelect(repository)}
         aria-label={repository.name}
+        className={styles.button}
       >
-        <h3>{repository.name}</h3>
-        <p>{repository.description ?? 'Description not provided'}</p>
+        <h3 className={styles.name}>{repository.name}</h3>
+        <p className={styles.description}>{repository.description ?? 'Description not provided'}</p>
       </button>
     </article>
   )

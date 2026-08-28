@@ -3,5 +3,6 @@ type ErrorStateProps = {
 }
 
 export function ErrorState({ message }: ErrorStateProps) {
-  return <p role="alert">{message}</p>
+  return <main className={styles.page}><p className={styles.content} role="alert">{message}</p></main>
 }
+import styles from './ErrorState.module.css'

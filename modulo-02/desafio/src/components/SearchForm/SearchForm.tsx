@@ -1,4 +1,5 @@
 import { useState, type FormEvent } from 'react'
+import styles from './SearchForm.module.css'
 
 type SearchFormProps = {
   onSearch: (username: string) => void
@@ -17,14 +18,16 @@ export function SearchForm({ onSearch }: SearchFormProps) {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className={styles.form} onSubmit={handleSubmit}>
       <label htmlFor="username">GitHub username</label>
       <input
         id="username"
+        className={styles.input}
+        placeholder="e.g. octocat"
         value={username}
         onChange={(event) => setUsername(event.target.value)}
       />
-      <button type="submit" disabled={!normalizedUsername}>
+      <button className={styles.button} type="submit" disabled={!normalizedUsername}>
         Search
       </button>
     </form>

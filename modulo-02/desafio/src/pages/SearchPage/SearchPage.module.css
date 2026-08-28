@@ -1,0 +1,10 @@
+.page { display: grid; grid-template-columns: minmax(280px, 1fr) minmax(420px, 1fr); min-height: 100vh; }
+.brandPanel { display: grid; place-items: center; padding: 48px; background: var(--color-brand); }
+.brand { margin: 0; color: white; font-size: clamp(2rem, 5vw, 4.5rem); font-weight: 800; letter-spacing: -0.08em; }
+.brand::before { content: "{ }"; margin-right: 0.22em; color: var(--color-accent); font-size: 0.65em; vertical-align: 0.12em; }
+.searchPanel { display: grid; place-items: center; padding: 48px; background: var(--color-surface); }
+.searchContent { width: min(100%, 410px); }
+.eyebrow { margin: 0 0 12px; color: var(--color-accent); font-size: 0.8rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; }
+.searchContent h1 { margin: 0; color: var(--color-brand); font-size: clamp(2rem, 4vw, 3.25rem); line-height: 1.05; letter-spacing: -0.04em; }
+.description { margin: 16px 0 32px; color: var(--color-muted); line-height: 1.6; }
+@media (max-width: 768px) { .page { grid-template-columns: 1fr; } .brandPanel { min-height: 34vh; padding: 32px; } .searchPanel { min-height: 66vh; padding: 40px 24px; } }

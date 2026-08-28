@@ -1,0 +1,2 @@
+.page { display: grid; min-height: 100vh; place-items: center; padding: 24px; background: var(--color-page); }
+.content { color: var(--color-brand); font-weight: 800; }

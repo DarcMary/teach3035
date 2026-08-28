@@ -1,3 +1,5 @@
+import styles from './LoadingState.module.css'
+
 export function LoadingState() {
-  return <p>Carregando...</p>
+  return <main className={styles.page}><p className={styles.content}>Carregando...</p></main>
 }

@@ -7,6 +7,7 @@ import { RepositoryList } from '../../components/RepositoryList/RepositoryList'
 import { getGitHubProfile } from '../../services/githubApi'
 import type { GitHubProfile, GitHubRepository } from '../../types/github'
 import { RepositoryModal } from '../../components/RepositoryModal/RepositoryModal'
+import styles from './ProfilePage.module.css'
 
 type ProfileState =
   | { status: 'loading' }
@@ -57,8 +58,10 @@ export function ProfilePage() {
   }
 
   return (
-    <main>
-      <ProfileHeader user={state.profile.user} />
+    <main className={styles.page}>
+      <div className={styles.content}>
+        <p className={styles.brand}>wtech</p>
+        <ProfileHeader user={state.profile.user} />
       <RepositoryList
         repositories={state.profile.repositories}
         onSelect={setSelectedRepository}
@@ -67,6 +70,7 @@ export function ProfilePage() {
         repository={selectedRepository}
         onClose={() => setSelectedRepository(null)}
       />
+      </div>
     </main>
   )
 }
