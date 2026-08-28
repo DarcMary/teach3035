@@ -1,0 +1,71 @@
+import { render, screen } from '@testing-library/react'
+import { MemoryRouter, Route, Routes } from 'react-router-dom'
+import { afterEach, expect, it, vi } from 'vitest'
+import { getGitHubProfile } from '../../services/githubApi'
+import type { GitHubProfile } from '../../types/github'
+import { ProfilePage } from './ProfilePage'
+
+vi.mock('../../services/githubApi', () => ({
+  getGitHubProfile: vi.fn(),
+}))
+
+const profile: GitHubProfile = {
+  user: {
+    login: 'octocat',
+    avatar_url: 'https://example.com/avatar.png',
+    name: 'The Octocat',
+    bio: null,
+  },
+  repositories: [
+    {
+      id: 1,
+      name: 'Hello-World',
+      description: null,
+      visibility: 'public',
+      html_url: 'https://github.com/octocat/Hello-World',
+      language: null,
+    },
+  ],
+}
+
+function renderProfilePage() {
+  return render(
+    <MemoryRouter initialEntries={['/profile/octocat']}>
+      <Routes>
+        <Route path="/profile/:username" element={<ProfilePage />} />
+      </Routes>
+    </MemoryRouter>,
+  )
+}
+
+afterEach(() => {
+  vi.clearAllMocks()
+})
+
+it('shows loading while profile data is pending', () => {
+  vi.mocked(getGitHubProfile).mockReturnValue(new Promise(() => {}))
+
+  renderProfilePage()
+
+  expect(screen.getByText('Carregando...')).toBeInTheDocument()
+})
+
+it('shows profile and repository data after loading', async () => {
+  vi.mocked(getGitHubProfile).mockResolvedValue(profile)
+
+  renderProfilePage()
+
+  expect(await screen.findByRole('heading', { name: 'The Octocat' })).toBeInTheDocument()
+  expect(screen.getByAltText('Avatar for The Octocat')).toBeInTheDocument()
+  expect(screen.getByText('Bio not provided')).toBeInTheDocument()
+  expect(screen.getByText('Hello-World')).toBeInTheDocument()
+  expect(screen.getByText('Description not provided')).toBeInTheDocument()
+})
+
+it('shows a not found message when the user does not exist', async () => {
+  vi.mocked(getGitHubProfile).mockRejectedValue(new Error('User not found'))
+
+  renderProfilePage()
+
+  expect(await screen.findByText('User not found')).toBeInTheDocument()
+})
