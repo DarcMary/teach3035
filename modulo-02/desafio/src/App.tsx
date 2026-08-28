@@ -1,12 +1,5 @@
 import { Route, Routes } from 'react-router-dom'
-
-function SearchPage() {
-  return (
-    <main>
-      <h1>GitHub Profile Search</h1>
-    </main>
-  )
-}
+import { SearchPage } from './pages/SearchPage/SearchPage'
 
 export default function App() {
   return (
