@@ -14,8 +14,8 @@ it('navigates to the profile route after a search', async () => {
   const user = userEvent.setup()
   render(<SearchPage />)
 
-  await user.type(screen.getByLabelText(/github username/i), 'octocat')
-  await user.click(screen.getByRole('button', { name: /search/i }))
+  await user.type(screen.getByLabelText(/usuário do github/i), 'octocat')
+  await user.click(screen.getByRole('button', { name: /buscar/i }))
 
   expect(navigate).toHaveBeenCalledWith('/profile/octocat')
 })

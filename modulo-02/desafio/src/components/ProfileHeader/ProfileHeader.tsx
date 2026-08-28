@@ -12,9 +12,9 @@ export function ProfileHeader({ user }: ProfileHeaderProps) {
     <header className={styles.header}>
       <img className={styles.avatar} src={user.avatar_url} alt={`Avatar for ${displayName}`} />
       <div>
-        <p className={styles.label}>Profile information</p>
+        <p className={styles.label}>Informações do perfil</p>
         <h1 className={styles.name}>{displayName}</h1>
-        <p className={styles.bio}>{user.bio ?? 'Bio not provided'}</p>
+        <p className={styles.bio}>{user.bio ?? 'Biografia não informada'}</p>
       </div>
     </header>
   )

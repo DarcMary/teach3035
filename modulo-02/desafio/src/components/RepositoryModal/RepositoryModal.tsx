@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import type { MouseEvent } from 'react'
 import type { GitHubRepository } from '../../types/github'
 import styles from './RepositoryModal.module.css'
@@ -9,14 +9,50 @@ type RepositoryModalProps = {
 }
 
 export function RepositoryModal({ repository, onClose }: RepositoryModalProps) {
+  const dialogRef = useRef<HTMLElement>(null)
+  const previousFocusRef = useRef<HTMLElement | null>(null)
+
   useEffect(() => {
     if (!repository) {
       return
     }
 
+    previousFocusRef.current =
+      document.activeElement instanceof HTMLElement ? document.activeElement : null
+
+    const focusableElements = () =>
+      Array.from(
+        dialogRef.current?.querySelectorAll<HTMLElement>(
+          'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])',
+        ) ?? [],
+      )
+
+    const closeButton = dialogRef.current?.querySelector<HTMLElement>(
+      '[data-close-button]',
+    )
+    closeButton?.focus()
+
     function handleKeyDown(event: KeyboardEvent) {
       if (event.key === 'Escape') {
         onClose()
+        return
+      }
+
+      if (event.key === 'Tab') {
+        const elements = focusableElements()
+        const firstElement = elements[0]
+        const lastElement = elements.at(-1)
+
+        if (!firstElement || !lastElement) {
+          event.preventDefault()
+          dialogRef.current?.focus()
+        } else if (event.shiftKey && document.activeElement === firstElement) {
+          event.preventDefault()
+          lastElement.focus()
+        } else if (!event.shiftKey && document.activeElement === lastElement) {
+          event.preventDefault()
+          firstElement.focus()
+        }
       }
     }
 
@@ -24,6 +60,7 @@ export function RepositoryModal({ repository, onClose }: RepositoryModalProps) {
 
     return () => {
       window.removeEventListener('keydown', handleKeyDown)
+      previousFocusRef.current?.focus()
     }
   }, [onClose, repository])
 
@@ -40,23 +77,25 @@ export function RepositoryModal({ repository, onClose }: RepositoryModalProps) {
   return (
     <div className={styles.backdrop} onClick={handleBackdropClick}>
       <section
+        ref={dialogRef}
         role="dialog"
         aria-modal="true"
         aria-labelledby="repository-title"
         className={styles.dialog}
+        tabIndex={-1}
       >
-        <button className={styles.closeButton} type="button" onClick={onClose} aria-label="Close">
+        <button className={styles.closeButton} type="button" onClick={onClose} aria-label="Fechar" data-close-button>
           ×
         </button>
-        <p className={styles.eyebrow}>Repository details</p>
+        <p className={styles.eyebrow}>Detalhes do repositório</p>
         <h2 className={styles.title} id="repository-title">{repository.name}</h2>
         <dl className={styles.details}>
-          <div><dt>Visibility</dt><dd>{repository.visibility}</dd></div>
-          <div><dt>Language</dt><dd>{repository.language ?? 'Language not provided'}</dd></div>
-          <div><dt>Description</dt><dd>{repository.description ?? 'Description not provided'}</dd></div>
+          <div><dt>Visibilidade</dt><dd>{repository.visibility}</dd></div>
+          <div><dt>Linguagem</dt><dd>{repository.language ?? 'Linguagem não informada'}</dd></div>
+          <div><dt>Descrição</dt><dd>{repository.description ?? 'Descrição não informada'}</dd></div>
         </dl>
         <a className={styles.link} href={repository.html_url} target="_blank" rel="noreferrer">
-          Open repository
+          Abrir repositório
         </a>
       </section>
     </div>

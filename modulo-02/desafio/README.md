@@ -61,4 +61,4 @@ The application uses GitHub's public API:
 - `GET /users/{username}`
 - `GET /users/{username}/repos`
 
-Unauthenticated requests are subject to GitHub API rate limits. If the limit is reached, wait before trying again.
+Unauthenticated requests are subject to GitHub API rate limits. If the limit is reached, wait before trying again. The repository request returns up to 100 items; accounts with more repositories would need pagination in a future iteration.

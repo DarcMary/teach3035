@@ -36,7 +36,10 @@ export function ProfilePage() {
         if (isCurrent) {
           setState({
             status: 'error',
-            message: error instanceof Error ? error.message : 'Unable to load profile',
+            message:
+              error instanceof Error && error.message === 'User not found'
+                ? 'Usuário não encontrado'
+                : 'Não foi possível carregar o perfil. Tente novamente.',
           })
         }
       }

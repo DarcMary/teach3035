@@ -16,10 +16,10 @@ export function SearchPage() {
       </section>
       <section className={styles.searchPanel}>
         <div className={styles.searchContent}>
-          <p className={styles.eyebrow}>GitHub profile finder</p>
-          <h1>GitHub Profile Search</h1>
+          <p className={styles.eyebrow}>Buscador de perfis GitHub</p>
+          <h1>Busca de perfil do GitHub</h1>
           <p className={styles.description}>
-            Enter a GitHub username to view profile information and repositories.
+            Digite um usuário do GitHub para ver informações do perfil e repositórios.
           </p>
           <SearchForm onSearch={handleSearch} />
         </div>

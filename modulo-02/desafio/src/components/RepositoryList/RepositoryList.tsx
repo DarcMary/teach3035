@@ -11,7 +11,7 @@ export function RepositoryList({ repositories, onSelect }: RepositoryListProps) 
   return (
     <section className={styles.section} aria-labelledby="repositories-heading">
       <div className={styles.headingRow}>
-        <h2 id="repositories-heading">Repositories</h2>
+      <h2 id="repositories-heading">Repositórios</h2>
         <span>{repositories.length}</span>
       </div>
       <div className={styles.grid}>{repositories.map((repository) => (

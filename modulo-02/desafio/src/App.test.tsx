@@ -11,6 +11,6 @@ it('renders the search page at the root route', () => {
   )
 
   expect(
-    screen.getByRole('heading', { name: /github profile search/i }),
+    screen.getByRole('heading', { name: /busca de perfil do github/i }),
   ).toBeInTheDocument()
 })

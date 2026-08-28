@@ -58,9 +58,9 @@ it('shows profile and repository data after loading', async () => {
 
   expect(await screen.findByRole('heading', { name: 'The Octocat' })).toBeInTheDocument()
   expect(screen.getByAltText('Avatar for The Octocat')).toBeInTheDocument()
-  expect(screen.getByText('Bio not provided')).toBeInTheDocument()
+  expect(screen.getByText('Biografia não informada')).toBeInTheDocument()
   expect(screen.getByText('Hello-World')).toBeInTheDocument()
-  expect(screen.getByText('Description not provided')).toBeInTheDocument()
+  expect(screen.getByText('Descrição não informada')).toBeInTheDocument()
 })
 
 it('shows a not found message when the user does not exist', async () => {
@@ -68,7 +68,7 @@ it('shows a not found message when the user does not exist', async () => {
 
   renderProfilePage()
 
-  expect(await screen.findByText('User not found')).toBeInTheDocument()
+  expect(await screen.findByText('Usuário não encontrado')).toBeInTheDocument()
 })
 
 it('opens the selected repository in a modal', async () => {

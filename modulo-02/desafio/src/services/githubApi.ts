@@ -23,7 +23,7 @@ export async function getGitHubProfile(
   const encodedUsername = encodeURIComponent(username)
   const [userResponse, repositoriesResponse] = await Promise.all([
     fetch(`${API_BASE_URL}/${encodedUsername}`),
-    fetch(`${API_BASE_URL}/${encodedUsername}/repos`),
+    fetch(`${API_BASE_URL}/${encodedUsername}/repos?per_page=100`),
   ])
 
   const [user, repositories] = await Promise.all([
