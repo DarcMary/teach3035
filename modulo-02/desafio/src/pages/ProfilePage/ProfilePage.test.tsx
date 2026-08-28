@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react'
 import { MemoryRouter, Route, Routes } from 'react-router-dom'
+import userEvent from '@testing-library/user-event'
 import { afterEach, expect, it, vi } from 'vitest'
 import { getGitHubProfile } from '../../services/githubApi'
 import type { GitHubProfile } from '../../types/github'
@@ -68,4 +69,17 @@ it('shows a not found message when the user does not exist', async () => {
   renderProfilePage()
 
   expect(await screen.findByText('User not found')).toBeInTheDocument()
+})
+
+it('opens the selected repository in a modal', async () => {
+  const user = userEvent.setup()
+  vi.mocked(getGitHubProfile).mockResolvedValue(profile)
+
+  renderProfilePage()
+
+  await user.click(
+    await screen.findByRole('button', { name: 'Hello-World' }),
+  )
+
+  expect(screen.getByRole('dialog', { name: 'Hello-World' })).toBeInTheDocument()
 })

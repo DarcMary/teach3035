@@ -5,7 +5,8 @@ import { LoadingState } from '../../components/LoadingState/LoadingState'
 import { ProfileHeader } from '../../components/ProfileHeader/ProfileHeader'
 import { RepositoryList } from '../../components/RepositoryList/RepositoryList'
 import { getGitHubProfile } from '../../services/githubApi'
-import type { GitHubProfile } from '../../types/github'
+import type { GitHubProfile, GitHubRepository } from '../../types/github'
+import { RepositoryModal } from '../../components/RepositoryModal/RepositoryModal'
 
 type ProfileState =
   | { status: 'loading' }
@@ -15,6 +16,8 @@ type ProfileState =
 export function ProfilePage() {
   const { username } = useParams()
   const [state, setState] = useState<ProfileState>({ status: 'loading' })
+  const [selectedRepository, setSelectedRepository] =
+    useState<GitHubRepository | null>(null)
 
   useEffect(() => {
     let isCurrent = true
@@ -56,7 +59,14 @@ export function ProfilePage() {
   return (
     <main>
       <ProfileHeader user={state.profile.user} />
-      <RepositoryList repositories={state.profile.repositories} />
+      <RepositoryList
+        repositories={state.profile.repositories}
+        onSelect={setSelectedRepository}
+      />
+      <RepositoryModal
+        repository={selectedRepository}
+        onClose={() => setSelectedRepository(null)}
+      />
     </main>
   )
 }
