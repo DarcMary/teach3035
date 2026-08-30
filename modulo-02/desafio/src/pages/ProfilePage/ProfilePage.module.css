@@ -1,5 +1,2 @@
-.page { min-height: 100vh; padding: 28px; background: var(--color-page); }
-.content { width: min(100%, 1120px); margin: 0 auto; }
-.brand { margin: 0 0 20px; color: var(--color-brand); font-size: 1.2rem; font-weight: 800; letter-spacing: -0.07em; }
-.brand::before { content: "{ }"; margin-right: 5px; color: var(--color-accent); font-size: 0.75em; }
-@media (max-width: 768px) { .page { padding: 20px; } }
+.content { width: min(100% - 56px, 1120px); min-height: 560px; margin: 28px auto; padding: 30px; border: 1px solid #e2e6ed; border-radius: 4px; background: white; box-shadow: 0 3px 12px rgba(23, 38, 64, 0.08); }
+@media (max-width: 768px) { .content { width: min(100% - 32px, 1120px); margin: 16px auto; padding: 20px; } }

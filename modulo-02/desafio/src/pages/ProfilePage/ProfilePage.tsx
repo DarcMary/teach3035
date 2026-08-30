@@ -6,6 +6,7 @@ import { RepositoryList } from '../../components/RepositoryList/RepositoryList'
 import { getGitHubProfile } from '../../services/githubApi'
 import type { GitHubProfile, GitHubRepository } from '../../types/github'
 import { RepositoryModal } from '../../components/RepositoryModal/RepositoryModal'
+import { ProfileShell } from '../../components/ProfileShell/ProfileShell'
 import styles from './ProfilePage.module.css'
 
 type ProfileState =
@@ -61,9 +62,8 @@ export function ProfilePage() {
   if (state.status === 'error') return null
 
   return (
-    <main className={styles.page}>
-      <div className={styles.content}>
-        <p className={styles.brand}>wtech</p>
+    <ProfileShell>
+      <section className={styles.content} aria-label="Conteúdo do perfil">
         <ProfileHeader user={state.profile.user} />
       <RepositoryList
         repositories={state.profile.repositories}
@@ -73,7 +73,7 @@ export function ProfilePage() {
         repository={selectedRepository}
         onClose={() => setSelectedRepository(null)}
       />
-      </div>
-    </main>
+      </section>
+    </ProfileShell>
   )
 }

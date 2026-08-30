@@ -50,6 +50,7 @@ it('shows loading while profile data is pending', () => {
 
   renderProfilePage()
 
+  expect(screen.getByRole('banner')).toBeInTheDocument()
   expect(screen.getByText('Carregando...')).toBeInTheDocument()
 })
 

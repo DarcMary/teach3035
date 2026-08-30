@@ -87,10 +87,11 @@ export function RepositoryModal({ repository, onClose }: RepositoryModalProps) {
         <button className={styles.closeButton} type="button" onClick={onClose} aria-label="Fechar" data-close-button>
           ×
         </button>
-        <p className={styles.eyebrow}>Detalhes do repositório</p>
+        <p className={styles.eyebrow}>Especificações</p>
         <h2 className={styles.title} id="repository-title">{repository.name}</h2>
         <dl className={styles.details}>
           <div><dt>Visibilidade</dt><dd>{repository.visibility}</dd></div>
+          <div><dt>Link do projeto</dt><dd>{repository.html_url}</dd></div>
           <div><dt>Linguagem</dt><dd>{repository.language ?? 'Linguagem não informada'}</dd></div>
           <div><dt>Descrição</dt><dd>{repository.description ?? 'Descrição não informada'}</dd></div>
         </dl>

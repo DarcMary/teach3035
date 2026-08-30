@@ -18,6 +18,8 @@ it('shows repository details and fallback values', () => {
   render(<RepositoryModal repository={repository} onClose={vi.fn()} />)
 
   expect(screen.getByRole('dialog', { name: 'Hello-World' })).toBeInTheDocument()
+  expect(screen.getByText('Especificações')).toBeInTheDocument()
+  expect(screen.getByText('Link do projeto')).toBeInTheDocument()
   expect(screen.getByText('public')).toBeInTheDocument()
   expect(screen.getByText('Descrição não informada')).toBeInTheDocument()
   expect(screen.getByText('Linguagem não informada')).toBeInTheDocument()
