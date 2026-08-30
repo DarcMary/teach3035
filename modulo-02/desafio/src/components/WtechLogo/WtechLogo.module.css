@@ -1,0 +1,6 @@
+.logo { display: inline-flex; align-items: center; gap: 0.24em; font-size: 1.35rem; font-weight: 800; letter-spacing: -0.09em; line-height: 1; }
+.symbol { display: inline-flex; width: 1.1em; height: 0.75em; align-items: center; gap: 0.1em; }
+.symbol i { display: block; width: 0.25em; height: 0.68em; border: 0.11em solid var(--color-accent); border-top: 0; border-bottom: 0; transform: skewX(-15deg); }
+.symbol i:nth-child(2) { height: 0.5em; transform: skewX(15deg); }
+.logo[data-tone='light'] { color: white; }
+.logo[data-tone='dark'] { color: var(--color-brand); }

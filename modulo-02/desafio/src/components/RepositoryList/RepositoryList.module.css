@@ -1,6 +1,6 @@
-.section { margin-top: 36px; }
-.headingRow { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
-.headingRow h2 { margin: 0; color: var(--color-brand); font-size: 1.2rem; }
-.headingRow span { display: grid; min-width: 28px; min-height: 28px; place-items: center; padding: 0 8px; border-radius: 99px; color: var(--color-brand); background: #dceaf7; font-size: 0.8rem; font-weight: 800; }
-.grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.section { margin-top: 30px; }
+.headingRow { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+.headingRow h2 { margin: 0; color: var(--color-text); font-size: 0.78rem; }
+.headingRow span { display: grid; min-width: 20px; min-height: 20px; place-items: center; padding: 0 6px; border-radius: 99px; color: var(--color-muted); background: #f1f3f6; font-size: 0.62rem; font-weight: 700; }
+.grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
 @media (max-width: 768px) { .grid { grid-template-columns: 1fr; } }

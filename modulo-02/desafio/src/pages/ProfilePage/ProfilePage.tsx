@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
-import { ErrorState } from '../../components/ErrorState/ErrorState'
+import { useNavigate, useParams } from 'react-router-dom'
 import { LoadingState } from '../../components/LoadingState/LoadingState'
 import { ProfileHeader } from '../../components/ProfileHeader/ProfileHeader'
 import { RepositoryList } from '../../components/RepositoryList/RepositoryList'
 import { getGitHubProfile } from '../../services/githubApi'
 import type { GitHubProfile, GitHubRepository } from '../../types/github'
 import { RepositoryModal } from '../../components/RepositoryModal/RepositoryModal'
+import { ProfileShell } from '../../components/ProfileShell/ProfileShell'
 import styles from './ProfilePage.module.css'
 
 type ProfileState =
@@ -16,6 +16,7 @@ type ProfileState =
 
 export function ProfilePage() {
   const { username } = useParams()
+  const navigate = useNavigate()
   const [state, setState] = useState<ProfileState>({ status: 'loading' })
   const [selectedRepository, setSelectedRepository] =
     useState<GitHubRepository | null>(null)
@@ -34,12 +35,14 @@ export function ProfilePage() {
         }
       } catch (error) {
         if (isCurrent) {
-          setState({
-            status: 'error',
-            message:
-              error instanceof Error && error.message === 'User not found'
-                ? 'Usuário não encontrado'
-                : 'Não foi possível carregar o perfil. Tente novamente.',
+          navigate('/', {
+            replace: true,
+            state: {
+              errorMessage:
+                error instanceof Error && error.message === 'User not found'
+                  ? 'Usuário não encontrado'
+                  : 'Não foi possível carregar o perfil. Tente novamente.',
+            },
           })
         }
       }
@@ -50,20 +53,17 @@ export function ProfilePage() {
     return () => {
       isCurrent = false
     }
-  }, [username])
+  }, [navigate, username])
 
   if (state.status === 'loading') {
     return <LoadingState />
   }
 
-  if (state.status === 'error') {
-    return <ErrorState message={state.message} />
-  }
+  if (state.status === 'error') return null
 
   return (
-    <main className={styles.page}>
-      <div className={styles.content}>
-        <p className={styles.brand}>wtech</p>
+    <ProfileShell>
+      <section className={styles.content} aria-label="Conteúdo do perfil">
         <ProfileHeader user={state.profile.user} />
       <RepositoryList
         repositories={state.profile.repositories}
@@ -73,7 +73,7 @@ export function ProfilePage() {
         repository={selectedRepository}
         onClose={() => setSelectedRepository(null)}
       />
-      </div>
-    </main>
+      </section>
+    </ProfileShell>
   )
 }
