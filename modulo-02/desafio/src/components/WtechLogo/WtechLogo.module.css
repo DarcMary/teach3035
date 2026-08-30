@@ -1,0 +1,4 @@
+.logo { display: inline-flex; align-items: center; gap: 0.18em; font-size: 1.35rem; font-weight: 800; letter-spacing: -0.075em; line-height: 1; }
+.symbol { color: var(--color-accent); font-size: 1.15em; font-weight: 900; letter-spacing: -0.38em; transform: rotate(90deg); }
+.logo[data-tone='light'] { color: white; }
+.logo[data-tone='dark'] { color: var(--color-brand); }
