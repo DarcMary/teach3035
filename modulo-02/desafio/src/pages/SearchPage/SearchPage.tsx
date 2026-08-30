@@ -1,9 +1,14 @@
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { SearchForm } from '../../components/SearchForm/SearchForm'
+import { WtechLogo } from '../../components/WtechLogo/WtechLogo'
 import styles from './SearchPage.module.css'
+
+type SearchLocationState = { errorMessage?: string }
 
 export function SearchPage() {
   const navigate = useNavigate()
+  const location = useLocation()
+  const errorMessage = (location.state as SearchLocationState | null)?.errorMessage
 
   function handleSearch(username: string) {
     navigate(`/profile/${username}`)
@@ -12,15 +17,12 @@ export function SearchPage() {
   return (
     <main className={styles.page}>
       <section className={styles.brandPanel} aria-label="Wtech">
-        <p className={styles.brand}>wtech</p>
+        <WtechLogo tone="light" />
       </section>
       <section className={styles.searchPanel}>
         <div className={styles.searchContent}>
-          <p className={styles.eyebrow}>Buscador de perfis GitHub</p>
-          <h1>Busca de perfil do GitHub</h1>
-          <p className={styles.description}>
-            Digite um usuário do GitHub para ver informações do perfil e repositórios.
-          </p>
+          {errorMessage && <p className={styles.error} role="alert">{errorMessage}</p>}
+          <h1>Entrar</h1>
           <SearchForm onSearch={handleSearch} />
         </div>
       </section>

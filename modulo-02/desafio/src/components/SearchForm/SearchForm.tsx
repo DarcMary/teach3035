@@ -19,16 +19,16 @@ export function SearchForm({ onSearch }: SearchFormProps) {
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
-      <label htmlFor="username">Usuário do GitHub</label>
+      <label htmlFor="username">Usuário</label>
       <input
         id="username"
         className={styles.input}
-        placeholder="Ex.: octocat"
+        placeholder="Usuário"
         value={username}
         onChange={(event) => setUsername(event.target.value)}
       />
       <button className={styles.button} type="submit" disabled={!normalizedUsername}>
-        Buscar
+        Entrar
       </button>
     </form>
   )
