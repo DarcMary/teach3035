@@ -6,7 +6,7 @@ import { SearchForm } from './SearchForm'
 it('disables submit until a username is entered', () => {
   render(<SearchForm onSearch={vi.fn()} />)
 
-  expect(screen.getByRole('button', { name: /buscar/i })).toBeDisabled()
+  expect(screen.getByRole('button', { name: 'Entrar' })).toBeDisabled()
 })
 
 it('trims the username before searching', async () => {
@@ -15,8 +15,8 @@ it('trims the username before searching', async () => {
 
   render(<SearchForm onSearch={onSearch} />)
 
-  await user.type(screen.getByLabelText(/usuário do github/i), '  octocat  ')
-  await user.click(screen.getByRole('button', { name: /buscar/i }))
+  await user.type(screen.getByLabelText('Usuário'), '  octocat  ')
+  await user.click(screen.getByRole('button', { name: 'Entrar' }))
 
   expect(onSearch).toHaveBeenCalledWith('octocat')
 })

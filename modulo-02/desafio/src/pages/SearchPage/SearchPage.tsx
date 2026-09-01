@@ -24,7 +24,6 @@ export function SearchPage() {
       <section className={styles.searchPanel}>
         <div className={styles.searchContent}>
           <h1>Entrar</h1>
-          <h2 className={styles.srOnly}>Busca de perfil do GitHub</h2>
           {errorMessage && <p className={styles.error} role="alert">{errorMessage}</p>}
           <SearchForm onSearch={handleSearch} />
         </div>

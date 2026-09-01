@@ -19,8 +19,8 @@ it('navigates to the profile route after a search', async () => {
     </MemoryRouter>,
   )
 
-  await user.type(screen.getByLabelText(/usuário do github/i), 'octocat')
-  await user.click(screen.getByRole('button', { name: /buscar/i }))
+  await user.type(screen.getByLabelText('Usuário'), 'octocat')
+  await user.click(screen.getByRole('button', { name: 'Entrar' }))
 
   expect(navigate).toHaveBeenCalledWith('/profile/octocat')
 })

@@ -22,13 +22,12 @@ export function SearchForm({ onSearch }: SearchFormProps) {
       <label htmlFor="username">Usuário</label>
       <input
         id="username"
-        aria-label="Usuário do GitHub"
         className={styles.input}
         placeholder="Digite aqui seu usuário do Github"
         value={username}
         onChange={(event) => setUsername(event.target.value)}
       />
-      <button className={styles.button} type="submit" disabled={!normalizedUsername}>Buscar</button>
+      <button className={styles.button} type="submit" disabled={!normalizedUsername}>Entrar</button>
     </form>
   )
 }
