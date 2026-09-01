@@ -1,3 +1,7 @@
+/// <reference types="node" />
+
+import { readFileSync } from 'node:fs'
+import { resolve } from 'node:path'
 import { render, screen } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 import userEvent from '@testing-library/user-event'
@@ -34,4 +38,25 @@ it('shows the login shell and error message passed through location state', () =
 
   expect(screen.getByRole('heading', { name: 'Entrar' })).toBeVisible()
   expect(screen.getByRole('alert')).toHaveTextContent('Usuário não encontrado')
+})
+
+it('keeps the desktop geometry while constraining logo and form widths at 375px and 768px', () => {
+  const logoStyles = readFileSync(
+    resolve(process.cwd(), 'src/components/WtechLogo/WtechLogo.module.css'),
+    'utf8',
+  )
+  const searchPageStyles = readFileSync(
+    resolve(process.cwd(), 'src/pages/SearchPage/SearchPage.module.css'),
+    'utf8',
+  )
+  const searchFormStyles = readFileSync(
+    resolve(process.cwd(), 'src/components/SearchForm/SearchForm.module.css'),
+    'utf8',
+  )
+
+  expect(logoStyles).toContain('width: min(357px, 100%)')
+  expect(logoStyles).toContain('height: auto')
+  expect(searchPageStyles).toContain('width: min(318px, 100%)')
+  expect(searchFormStyles).toContain('width: 100%')
+  expect(searchFormStyles).toContain('max-width: 318px')
 })
