@@ -8,11 +8,14 @@ type WtechLogoProps = {
 }
 
 export function WtechLogo({ tone, size }: WtechLogoProps) {
+  const dimensions = size === 'large' ? { width: 357, height: 63 } : { width: 153, height: 27 }
+
   return (
     <img
       className={styles[size]}
       src={tone === 'light' ? lightLogo : darkLogo}
       alt="Wtech"
+      {...dimensions}
     />
   )
 }
