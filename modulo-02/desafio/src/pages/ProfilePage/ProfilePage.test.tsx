@@ -4,6 +4,7 @@ import userEvent from '@testing-library/user-event'
 import { afterEach, expect, it, vi } from 'vitest'
 import { getGitHubProfile } from '../../services/githubApi'
 import type { GitHubProfile } from '../../types/github'
+import { SearchPage } from '../SearchPage/SearchPage'
 import { ProfilePage } from './ProfilePage'
 
 vi.mock('../../services/githubApi', () => ({
@@ -33,6 +34,7 @@ function renderProfilePage() {
   return render(
     <MemoryRouter initialEntries={['/profile/octocat']}>
       <Routes>
+        <Route path="/" element={<SearchPage />} />
         <Route path="/profile/:username" element={<ProfilePage />} />
       </Routes>
     </MemoryRouter>,
@@ -63,12 +65,13 @@ it('shows profile and repository data after loading', async () => {
   expect(screen.getByText('Descrição não informada')).toBeInTheDocument()
 })
 
-it('shows a not found message when the user does not exist', async () => {
+it('returns to the search page with a not found error when the user does not exist', async () => {
   vi.mocked(getGitHubProfile).mockRejectedValue(new Error('User not found'))
 
   renderProfilePage()
 
-  expect(await screen.findByText('Usuário não encontrado')).toBeInTheDocument()
+  expect(await screen.findByRole('heading', { name: 'Entrar' })).toBeVisible()
+  expect(await screen.findByRole('alert')).toHaveTextContent('Usuário não encontrado')
 })
 
 it('opens the selected repository in a modal', async () => {
