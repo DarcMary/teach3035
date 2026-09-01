@@ -50,7 +50,9 @@ it('shows loading while profile data is pending', () => {
 
   renderProfilePage()
 
-  expect(screen.getByText('Carregando...')).toBeInTheDocument()
+  expect(screen.getByRole('banner')).toBeVisible()
+  expect(screen.getByRole('status')).toHaveTextContent('Carregando...')
+  expect(screen.getByRole('img', { name: 'Wtech' })).toBeVisible()
 })
 
 it('shows profile and repository data after loading', async () => {
@@ -58,6 +60,7 @@ it('shows profile and repository data after loading', async () => {
 
   renderProfilePage()
 
+  expect(await screen.findByRole('heading', { name: 'Informações do Perfil' })).toBeInTheDocument()
   expect(await screen.findByRole('heading', { name: 'The Octocat' })).toBeInTheDocument()
   expect(screen.getByAltText('Avatar for The Octocat')).toBeInTheDocument()
   expect(screen.getByText('Biografia não informada')).toBeInTheDocument()

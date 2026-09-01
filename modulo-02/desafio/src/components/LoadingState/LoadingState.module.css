@@ -1,2 +1,6 @@
-.page { display: grid; min-height: 100vh; place-items: center; padding: 24px; background: var(--color-page); }
-.content { color: var(--color-brand); font-weight: 800; }
+.content { display: grid; min-height: calc(100vh - 172px); place-items: center; align-content: center; gap: 24px; color: var(--color-text); font-size: 30px; font-weight: 700; }
+.content p { margin: 0; }
+.loader { position: relative; display: block; width: 80px; height: 80px; border: 3px solid #1688ff; border-radius: 50%; }
+.loader::before, .loader::after { position: absolute; content: ''; background: var(--color-surface); }
+.loader::before { width: 22px; height: 22px; transform: translate(44px, -5px); }
+.loader::after { width: 22px; height: 22px; transform: translate(-5px, 44px); }

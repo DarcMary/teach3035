@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { LoadingState } from '../../components/LoadingState/LoadingState'
+import { ProfileShell } from '../../components/ProfileShell/ProfileShell'
 import { ProfileHeader } from '../../components/ProfileHeader/ProfileHeader'
 import { RepositoryList } from '../../components/RepositoryList/RepositoryList'
 import { getGitHubProfile } from '../../services/githubApi'
@@ -55,19 +56,18 @@ export function ProfilePage() {
   }
 
   return (
-    <main className={styles.page}>
+    <ProfileShell>
       <div className={styles.content}>
-        <p className={styles.brand}>wtech</p>
         <ProfileHeader user={state.profile.user} />
-      <RepositoryList
-        repositories={state.profile.repositories}
-        onSelect={setSelectedRepository}
-      />
-      <RepositoryModal
-        repository={selectedRepository}
-        onClose={() => setSelectedRepository(null)}
-      />
+        <RepositoryList
+          repositories={state.profile.repositories}
+          onSelect={setSelectedRepository}
+        />
+        <RepositoryModal
+          repository={selectedRepository}
+          onClose={() => setSelectedRepository(null)}
+        />
       </div>
-    </main>
+    </ProfileShell>
   )
 }
