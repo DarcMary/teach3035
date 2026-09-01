@@ -68,6 +68,16 @@ it('shows profile and repository data after loading', async () => {
   expect(screen.getByText('Descrição não informada')).toBeInTheDocument()
 })
 
+it('keeps the desktop profile card aligned to the Figma content area', () => {
+  const styles = readFileSync(
+    resolve(process.cwd(), 'src/components/ProfileHeader/ProfileHeader.module.css'),
+    'utf8',
+  )
+
+  expect(styles).toContain('width: min(635px, 100%)')
+  expect(styles).toContain('height: 178px')
+})
+
 it('returns to the search page with a not found error when the user does not exist', async () => {
   vi.mocked(getGitHubProfile).mockRejectedValue(new Error('User not found'))
 
@@ -89,3 +99,7 @@ it('opens the selected repository in a modal', async () => {
 
   expect(screen.getByRole('dialog', { name: 'Hello-World' })).toBeInTheDocument()
 })
+/// <reference types="node" />
+
+import { readFileSync } from 'node:fs'
+import { resolve } from 'node:path'

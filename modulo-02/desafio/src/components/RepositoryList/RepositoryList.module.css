@@ -1,7 +1,11 @@
 .section { margin-top: 70px; }
 .headingRow { display: flex; align-items: center; justify-content: space-between; margin: 0 36px 36px; }
 .headingRow h2 { margin: 0; color: var(--color-text); font-size: 30px; line-height: 1.2; }
-.headingRow span { color: var(--color-muted); font-size: 12px; }
-.grid { display: grid; grid-template-columns: repeat(3, 365px); justify-content: center; gap: 38px; }
-@media (max-width: 1200px) { .grid { grid-template-columns: repeat(2, minmax(0, 365px)); } }
-@media (max-width: 768px) { .section { margin-top: 52px; } .headingRow { margin: 0 0 28px; } .grid { grid-template-columns: minmax(0, 365px); } }
+.pagination { display: flex; align-items: center; gap: 8px; color: var(--color-muted); font-size: 12px; }
+.pageButton { display: grid; width: 26px; height: 26px; place-items: center; padding: 0; border: 1px solid var(--color-border); border-radius: 4px; background: var(--color-surface); }
+.pageButton img { width: 10px; height: 10px; }
+.nextArrow { transform: scaleX(-1); }
+.pageButton:disabled { cursor: not-allowed; opacity: 0.45; }
+.viewport { max-width: 100%; overflow-x: auto; overscroll-behavior-inline: contain; scrollbar-width: thin; }
+.track { display: flex; width: max-content; gap: 38px; padding: 0 64px 8px; }
+@media (max-width: 768px) { .section { margin-top: 52px; } .headingRow { margin: 0 0 28px; } .track { gap: 20px; padding: 0 0 8px; } }

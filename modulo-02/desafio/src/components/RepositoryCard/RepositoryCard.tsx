@@ -16,7 +16,16 @@ export function RepositoryCard({ repository, onSelect }: RepositoryCardProps) {
         className={styles.button}
       >
         <h3 className={styles.name}>{repository.name}</h3>
-        <p className={styles.description}>{repository.description ?? 'Descrição não informada'}</p>
+        <span className={styles.fields}>
+          <span className={styles.field}>
+            <span className={styles.label}>Link</span>
+            <span className={styles.value}>{repository.html_url}</span>
+          </span>
+          <span className={styles.field}>
+            <span className={styles.label}>Descrição</span>
+            <span className={styles.value}>{repository.description ?? 'Descrição não informada'}</span>
+          </span>
+        </span>
       </button>
     </article>
   )
