@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap');
+
+:root { font-family: 'DM Sans', sans-serif; color: #20202a; background: #f4f2ee; }
+* { box-sizing: border-box; }
+body { margin: 0; min-width: 320px; }
+.catalogue { min-height: 100vh; padding: 48px 20px; background: radial-gradient(circle at top right, #d8e5d5, transparent 35%), #f4f2ee; }
+.catalogue-card { max-width: 930px; margin: 0 auto; padding: 44px; background: #fffdfa; border: 1px solid #e5e1da; border-radius: 20px; box-shadow: 0 18px 50px rgba(42, 45, 36, .1); }
+.eyebrow { margin: 0 0 8px; color: #667653; font-size: .75rem; font-weight: 700; letter-spacing: .13em; }
+h1 { margin: 0; font: 700 clamp(2rem, 4vw, 3rem)/1.1 'Playfair Display', serif; }
+.intro { max-width: 600px; margin: 14px 0 30px; color: #62616a; }
+label { display: block; margin-bottom: 8px; font-weight: 700; }
+input { width: 100%; padding: 14px 16px; border: 1px solid #bcbab4; border-radius: 10px; color: inherit; font: inherit; }
+input:focus { outline: 3px solid #cbdcc4; border-color: #5f7853; }
+.result-count { margin: 20px 0 12px; color: #62616a; font-size: .9rem; }
+@media (max-width: 600px) { .catalogue { padding: 24px 12px; } .catalogue-card { padding: 28px 20px; border-radius: 14px; } }

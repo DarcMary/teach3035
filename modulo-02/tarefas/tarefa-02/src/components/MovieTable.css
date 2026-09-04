@@ -1,0 +1,9 @@
+.table-wrapper { overflow-x: auto; border: 1px solid #e5e1da; border-radius: 12px; }
+table { width: 100%; min-width: 580px; border-collapse: collapse; background: #fff; }
+th, td { padding: 14px 18px; text-align: left; border-bottom: 1px solid #eeeae4; }
+th { background: #f6f5f1; color: #505349; font-size: .8rem; letter-spacing: .04em; text-transform: uppercase; }
+tbody tr:last-child td { border-bottom: 0; }
+tbody tr:hover { background: #fcfbf8; }
+.poster { display: block; width: 48px; height: 68px; border-radius: 5px; object-fit: cover; background: #e8e5df; }
+.genre { display: inline-block; padding: 5px 10px; border-radius: 999px; background: #e7efe4; color: #45603e; font-size: .85rem; font-weight: 600; text-transform: capitalize; }
+.empty-state { padding: 32px; color: #62616a; text-align: center; }
