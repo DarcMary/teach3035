@@ -1,0 +1,2 @@
+.large { display: block; width: min(357px, 100%); height: auto; }
+.small { display: block; width: min(153px, 100%); height: auto; }

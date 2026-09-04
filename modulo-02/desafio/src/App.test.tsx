@@ -10,7 +10,5 @@ it('renders the search page at the root route', () => {
     </MemoryRouter>,
   )
 
-  expect(
-    screen.getByRole('heading', { name: /busca de perfil do github/i }),
-  ).toBeInTheDocument()
+  expect(screen.getByRole('heading', { name: 'Entrar' })).toBeInTheDocument()
 })

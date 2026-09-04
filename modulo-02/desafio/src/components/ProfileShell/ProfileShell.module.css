@@ -1,0 +1,4 @@
+.page { min-height: 100vh; padding: 88px 0 24px; background: var(--color-page); }
+.banner { position: fixed; z-index: 1; top: 0; right: 0; left: 0; display: flex; height: 88px; align-items: center; padding: 0 max(28px, calc((100vw - 1299px) / 2)); background: var(--color-surface); }
+.surface { width: min(1299px, calc(100% - 48px)); min-height: calc(100vh - 112px); margin: 24px auto 0; padding: 30px 28px 36px; background: var(--color-surface); box-shadow: var(--shadow-card); }
+@media (max-width: 700px) { .page { padding-top: 72px; } .banner { height: 72px; padding: 0 24px; } .surface { width: calc(100% - 32px); min-height: calc(100vh - 88px); margin-top: 16px; padding: 24px 20px 28px; } }
