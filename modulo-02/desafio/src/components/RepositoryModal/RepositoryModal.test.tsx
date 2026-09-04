@@ -1,4 +1,6 @@
 import { render, screen } from '@testing-library/react'
+import { readFileSync } from 'node:fs'
+import { resolve } from 'node:path'
 import { useState } from 'react'
 import userEvent from '@testing-library/user-event'
 import { expect, it, vi } from 'vitest'
@@ -17,9 +19,11 @@ const repository: GitHubRepository = {
 it('shows repository details and fallback values', () => {
   render(<RepositoryModal repository={repository} onClose={vi.fn()} />)
 
+  expect(screen.getByRole('heading', { name: 'Especificações' })).toBeVisible()
   expect(screen.getByRole('dialog', { name: 'Hello-World' })).toBeInTheDocument()
-  expect(screen.getByText('Especificações')).toBeInTheDocument()
-  expect(screen.getByText('Link do projeto')).toBeInTheDocument()
+  expect(screen.getByText('Link')).toBeVisible()
+  expect(screen.getByText('Privacidade')).toBeVisible()
+  expect(screen.getByText('Linguagem')).toBeVisible()
   expect(screen.getByText('public')).toBeInTheDocument()
   expect(screen.getByText('Descrição não informada')).toBeInTheDocument()
   expect(screen.getByText('Linguagem não informada')).toBeInTheDocument()
@@ -27,6 +31,15 @@ it('shows repository details and fallback values', () => {
     'href',
     repository.html_url,
   )
+})
+
+it('keeps a proportional gap between the modal heading and repository name', () => {
+  const styles = readFileSync(
+    resolve(process.cwd(), 'src/components/RepositoryModal/RepositoryModal.module.css'),
+    'utf8',
+  )
+
+  expect(styles).toContain('.heading { margin: 0 0 32px;')
 })
 
 it('closes when the close button is clicked', async () => {

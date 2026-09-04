@@ -1,14 +1,18 @@
-import type { PropsWithChildren } from 'react'
+import type { ReactNode } from 'react'
 import { WtechLogo } from '../WtechLogo/WtechLogo'
 import styles from './ProfileShell.module.css'
 
-export function ProfileShell({ children }: PropsWithChildren) {
+type ProfileShellProps = {
+  children: ReactNode
+}
+
+export function ProfileShell({ children }: ProfileShellProps) {
   return (
     <main className={styles.page}>
-      <header className={styles.header}>
-        <WtechLogo tone="dark" />
+      <header className={styles.banner}>
+        <WtechLogo tone="dark" size="small" />
       </header>
-      {children}
+      <section className={styles.surface}>{children}</section>
     </main>
   )
 }

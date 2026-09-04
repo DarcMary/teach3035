@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react'
 import type { MouseEvent } from 'react'
 import type { GitHubRepository } from '../../types/github'
+import closeArtwork from '../../assets/repository-modal-close.svg'
 import styles from './RepositoryModal.module.css'
 
 type RepositoryModalProps = {
@@ -80,24 +81,21 @@ export function RepositoryModal({ repository, onClose }: RepositoryModalProps) {
         ref={dialogRef}
         role="dialog"
         aria-modal="true"
-        aria-labelledby="repository-title"
+        aria-label={repository.name}
         className={styles.dialog}
         tabIndex={-1}
       >
         <button className={styles.closeButton} type="button" onClick={onClose} aria-label="Fechar" data-close-button>
-          ×
+          <img src={closeArtwork} alt="" />
         </button>
-        <p className={styles.eyebrow}>Especificações</p>
-        <h2 className={styles.title} id="repository-title">{repository.name}</h2>
+        <h2 className={styles.heading}>Especificações</h2>
+        <h3 className={styles.title}>{repository.name}</h3>
         <dl className={styles.details}>
-          <div><dt>Visibilidade</dt><dd>{repository.visibility}</dd></div>
-          <div><dt>Link do projeto</dt><dd>{repository.html_url}</dd></div>
+          <div><dt>Link</dt><dd><a href={repository.html_url} target="_blank" rel="noreferrer" aria-label="Abrir repositório">{repository.html_url}</a></dd></div>
+          <div><dt>Privacidade</dt><dd>{repository.visibility}</dd></div>
           <div><dt>Linguagem</dt><dd>{repository.language ?? 'Linguagem não informada'}</dd></div>
           <div><dt>Descrição</dt><dd>{repository.description ?? 'Descrição não informada'}</dd></div>
         </dl>
-        <a className={styles.link} href={repository.html_url} target="_blank" rel="noreferrer">
-          Abrir repositório
-        </a>
       </section>
     </div>
   )

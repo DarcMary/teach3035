@@ -23,13 +23,11 @@ export function SearchForm({ onSearch }: SearchFormProps) {
       <input
         id="username"
         className={styles.input}
-        placeholder="Usuário"
+        placeholder="Digite aqui seu usuário do Github"
         value={username}
         onChange={(event) => setUsername(event.target.value)}
       />
-      <button className={styles.button} type="submit" disabled={!normalizedUsername}>
-        Entrar
-      </button>
+      <button className={styles.button} type="submit" disabled={!normalizedUsername}>Entrar</button>
     </form>
   )
 }

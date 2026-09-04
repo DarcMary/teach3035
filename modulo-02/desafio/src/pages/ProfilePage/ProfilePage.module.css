@@ -1,2 +1,1 @@
-.content { width: min(100% - 56px, 1120px); min-height: 560px; margin: 28px auto; padding: 30px; border: 1px solid #e2e6ed; border-radius: 4px; background: white; box-shadow: 0 3px 12px rgba(23, 38, 64, 0.08); }
-@media (max-width: 768px) { .content { width: min(100% - 32px, 1120px); margin: 16px auto; padding: 20px; } }
+.content { min-width: 0; }
