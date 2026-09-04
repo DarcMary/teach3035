@@ -1,13 +1,18 @@
-import { ProfileShell } from '../ProfileShell/ProfileShell'
+import { WtechLogo } from '../WtechLogo/WtechLogo'
 import styles from './LoadingState.module.css'
 
 export function LoadingState() {
   return (
-    <ProfileShell>
-      <div className={styles.content} role="status">
+    <main className={styles.page}>
+      <header className={styles.brandPanel} aria-label="Wtech">
+        <WtechLogo tone="light" size="large" />
+      </header>
+      <section className={styles.loadingPanel} role="status">
+        <div className={styles.content}>
         <span className={styles.loader} aria-hidden="true" />
         <p>Carregando...</p>
-      </div>
-    </ProfileShell>
+        </div>
+      </section>
+    </main>
   )
 }
