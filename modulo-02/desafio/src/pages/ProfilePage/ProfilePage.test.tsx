@@ -76,6 +76,18 @@ it('keeps the desktop profile card aligned to the Figma content area', () => {
 
   expect(styles).toContain('width: min(635px, 100%)')
   expect(styles).toContain('height: 178px')
+  expect(styles).toContain('border: 1px solid #E3E7EB')
+  expect(styles).toContain('border-radius: 18px')
+})
+
+it('keeps the profile and repository sections on the same responsive content axis', () => {
+  const styles = readFileSync(
+    resolve(process.cwd(), 'src/components/RepositoryList/RepositoryList.module.css'),
+    'utf8',
+  )
+
+  expect(styles).toContain('.headingRow { display: flex; align-items: center; justify-content: space-between; margin: 0 0 36px; }')
+  expect(styles).toContain('.track { display: flex; width: max-content; gap: 38px; padding: 0 18px 8px; }')
 })
 
 it('returns to the search page with the account error banner when the user does not exist', async () => {
