@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { SearchForm } from '../../components/SearchForm/SearchForm'
 import { WtechLogo } from '../../components/WtechLogo/WtechLogo'
@@ -12,7 +12,13 @@ export function SearchPage() {
   const navigate = useNavigate()
   const location = useLocation()
   const { errorMessage } = (location.state as SearchLocationState | null) ?? {}
-  const [isErrorVisible, setIsErrorVisible] = useState(Boolean(errorMessage))
+  const [visibleError, setVisibleError] = useState(errorMessage ?? null)
+
+  useEffect(() => {
+    if (errorMessage) {
+      navigate(location.pathname, { replace: true, state: null })
+    }
+  }, [errorMessage, location.pathname, navigate])
 
   function handleSearch(username: string) {
     navigate(`/profile/${username}`)
@@ -26,7 +32,7 @@ export function SearchPage() {
       <section className={styles.searchPanel}>
         <div className={styles.searchContent}>
           <h1>Entrar</h1>
-          {isErrorVisible && errorMessage && (
+          {visibleError && (
             <div className={styles.error} role="alert">
               <span className={styles.errorBadge} aria-hidden="true">×</span>
               <div className={styles.errorCopy}>
@@ -37,7 +43,7 @@ export function SearchPage() {
                 className={styles.errorClose}
                 type="button"
                 aria-label="Fechar aviso de erro"
-                onClick={() => setIsErrorVisible(false)}
+                onClick={() => setVisibleError(null)}
               >
                 ×
               </button>

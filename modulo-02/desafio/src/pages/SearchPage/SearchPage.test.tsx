@@ -23,6 +23,8 @@ it('navigates to the profile route after a search', async () => {
     </MemoryRouter>,
   )
 
+  expect(screen.queryByRole('alert')).not.toBeInTheDocument()
+
   await user.type(screen.getByLabelText('Usuário'), 'octocat')
   await user.click(screen.getByRole('button', { name: 'Entrar' }))
 
@@ -42,6 +44,7 @@ it('shows the Figma account error banner above the username field', () => {
   expect(screen.getByLabelText('Usuário').compareDocumentPosition(screen.getByRole('alert'))).toBe(
     Node.DOCUMENT_POSITION_PRECEDING,
   )
+  expect(navigate).toHaveBeenCalledWith('/', { replace: true, state: null })
 })
 
 it('closes the account error banner from its close button', async () => {
