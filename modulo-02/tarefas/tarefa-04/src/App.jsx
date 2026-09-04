@@ -1,0 +1,5 @@
+import { useState } from 'react'
+import { TaskProvider, useTasks } from './context/TaskContext'
+import './App.css'
+function Todo(){const {tasks,addTask,toggleTask,removeTask}=useTasks();const [title,setTitle]=useState('');const submit=(e)=>{e.preventDefault();addTask(title);setTitle('')};return <main><section><p className="eyebrow">ORGANIZAÇÃO</p><h1>Minha lista de tarefas</h1><form onSubmit={submit}><label htmlFor="task">Nova tarefa</label><div><input id="task" value={title} onChange={(e)=>setTitle(e.target.value)} placeholder="O que você precisa fazer?"/><button>Adicionar</button></div></form>{tasks.length?<ul>{tasks.map((task)=><li key={task.id}><label><input type="checkbox" checked={task.completed} onChange={()=>toggleTask(task.id)}/><span className={task.completed?'completed':''}>{task.title}</span></label><button className="remove" onClick={()=>removeTask(task.id)} aria-label={`Excluir ${task.title}`}>Excluir</button></li>)}</ul>:<p className="empty">Adicione sua primeira tarefa.</p>}</section></main>}
+export default function App(){return <TaskProvider><Todo/></TaskProvider>}
