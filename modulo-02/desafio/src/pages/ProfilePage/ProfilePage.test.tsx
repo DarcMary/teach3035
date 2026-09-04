@@ -1,3 +1,7 @@
+/// <reference types="node" />
+
+import { readFileSync } from 'node:fs'
+import { resolve } from 'node:path'
 import { render, screen } from '@testing-library/react'
 import { MemoryRouter, Route, Routes } from 'react-router-dom'
 import userEvent from '@testing-library/user-event'
@@ -111,7 +115,3 @@ it('opens the selected repository in a modal', async () => {
 
   expect(screen.getByRole('dialog', { name: 'Hello-World' })).toBeInTheDocument()
 })
-/// <reference types="node" />
-
-import { readFileSync } from 'node:fs'
-import { resolve } from 'node:path'
