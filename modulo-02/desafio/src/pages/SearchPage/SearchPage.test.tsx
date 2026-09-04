@@ -44,7 +44,7 @@ it('shows the Figma account error banner above the username field', () => {
   )
 })
 
-it('keeps the desktop geometry while constraining logo and form widths at 375px and 768px', () => {
+it('keeps the responsive Figma geometry for the login panels and account error banner', () => {
   const logoStyles = readFileSync(
     resolve(process.cwd(), 'src/components/WtechLogo/WtechLogo.module.css'),
     'utf8',
@@ -64,14 +64,18 @@ it('keeps the desktop geometry while constraining logo and form widths at 375px 
 
   expect(logoStyles).toContain('width: min(357px, 100%)')
   expect(logoStyles).toContain('height: auto')
-  expect(searchPageStyles).toContain('width: min(318px, 100%)')
+  expect(searchPageStyles).toContain('grid-template-columns: minmax(0, 1.6fr) minmax(347px, 1fr)')
+  expect(searchPageStyles).toContain('width: min(347px, 100%)')
+  expect(searchPageStyles).toContain('width: 100%; height: 84px;')
+  expect(searchPageStyles).toContain('border-radius: 22px')
+  expect(searchPageStyles).toContain('@media (max-width: 960px) { .searchPanel { padding: 48px 0; } }')
   expect(searchPageStyles).toContain('color: #303030')
   expect(searchPageStyles).toContain('text-align: center')
   expect(searchPageStyles).toContain('.errorCopy { display: grid; min-width: 0;')
   expect(searchPageStyles).toContain('white-space: normal')
   expect(searchPageStyles).toContain('overflow-wrap: anywhere')
   expect(searchFormStyles).toContain('width: 100%')
-  expect(searchFormStyles).toContain('max-width: 318px')
+  expect(searchFormStyles).toContain('max-width: 347px')
   expect(searchFormStyles).toContain('font-weight: 400')
   expect(lightLogo).toContain('fill="#FFB629"')
 })
