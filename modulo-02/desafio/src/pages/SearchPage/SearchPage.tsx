@@ -24,7 +24,16 @@ export function SearchPage() {
       <section className={styles.searchPanel}>
         <div className={styles.searchContent}>
           <h1>Entrar</h1>
-          {errorMessage && <p className={styles.error} role="alert">{errorMessage}</p>}
+          {errorMessage && (
+            <div className={styles.error} role="alert">
+              <span className={styles.errorBadge} aria-hidden="true">×</span>
+              <div className={styles.errorCopy}>
+                <strong>Ops!</strong>
+                <span>Não conseguimos identificar sua conta.</span>
+              </div>
+              <span className={styles.errorClose} aria-hidden="true">×</span>
+            </div>
+          )}
           <SearchForm onSearch={handleSearch} />
         </div>
       </section>

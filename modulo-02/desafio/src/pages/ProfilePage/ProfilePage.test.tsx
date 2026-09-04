@@ -78,13 +78,13 @@ it('keeps the desktop profile card aligned to the Figma content area', () => {
   expect(styles).toContain('height: 178px')
 })
 
-it('returns to the search page with a not found error when the user does not exist', async () => {
+it('returns to the search page with the account error banner when the user does not exist', async () => {
   vi.mocked(getGitHubProfile).mockRejectedValue(new Error('User not found'))
 
   renderProfilePage()
 
   expect(await screen.findByRole('heading', { name: 'Entrar' })).toBeVisible()
-  expect(await screen.findByRole('alert')).toHaveTextContent('Usuário não encontrado')
+  expect(await screen.findByRole('alert')).toHaveTextContent('Não conseguimos identificar sua conta.')
 })
 
 it('opens the selected repository in a modal', async () => {

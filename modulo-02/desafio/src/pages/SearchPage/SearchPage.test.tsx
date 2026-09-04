@@ -29,7 +29,7 @@ it('navigates to the profile route after a search', async () => {
   expect(navigate).toHaveBeenCalledWith('/profile/octocat')
 })
 
-it('shows the login shell and error message passed through location state', () => {
+it('shows the Figma account error banner above the username field', () => {
   render(
     <MemoryRouter initialEntries={[{ pathname: '/', state: { errorMessage: 'Usuário não encontrado' } }]}>
       <SearchPage />
@@ -37,7 +37,11 @@ it('shows the login shell and error message passed through location state', () =
   )
 
   expect(screen.getByRole('heading', { name: 'Entrar' })).toBeVisible()
-  expect(screen.getByRole('alert')).toHaveTextContent('Usuário não encontrado')
+  expect(screen.getByRole('alert')).toHaveTextContent('Ops!')
+  expect(screen.getByRole('alert')).toHaveTextContent('Não conseguimos identificar sua conta.')
+  expect(screen.getByLabelText('Usuário').compareDocumentPosition(screen.getByRole('alert'))).toBe(
+    Node.DOCUMENT_POSITION_PRECEDING,
+  )
 })
 
 it('keeps the desktop geometry while constraining logo and form widths at 375px and 768px', () => {
