@@ -3,13 +3,11 @@
 :root {
   --color-brand: #05478A;
   --color-brand-dark: #003a6b;
-  --color-accent: #FC8621;
   --color-page: #F7F7F7;
   --color-surface: #ffffff;
   --color-text: #202E49;
   --color-muted: #6A6F73;
   --color-border: #dfe4ee;
-  --color-danger: #c93b39;
   --shadow-card: 0 4px 21px rgba(0, 0, 0, 0.1);
   font-family: Montserrat, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
     "Segoe UI", sans-serif;

@@ -5,7 +5,7 @@ function App() {
   const [contagem, setContagem] = useState(0)
 
   function handleClicar() {
-    setContagem(contagem + 1)
+    setContagem((valorAtual) => valorAtual + 1)
   }
 
   function handleResetar() {

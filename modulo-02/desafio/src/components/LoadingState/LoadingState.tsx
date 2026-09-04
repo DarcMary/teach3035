@@ -1,6 +1,5 @@
 import { WtechLogo } from '../WtechLogo/WtechLogo'
 import styles from './LoadingState.module.css'
-import { ProfileShell } from '../ProfileShell/ProfileShell'
 
 export function LoadingState() {
   return (
@@ -10,8 +9,8 @@ export function LoadingState() {
       </header>
       <section className={styles.loadingPanel} role="status">
         <div className={styles.content}>
-        <span className={styles.loader} aria-hidden="true" />
-        <p>Carregando...</p>
+          <span className={styles.loader} aria-hidden="true" />
+          <p>Carregando...</p>
         </div>
       </section>
     </main>

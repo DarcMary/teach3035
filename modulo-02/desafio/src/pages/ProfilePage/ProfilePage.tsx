@@ -7,7 +7,6 @@ import { RepositoryList } from '../../components/RepositoryList/RepositoryList'
 import { getGitHubProfile } from '../../services/githubApi'
 import type { GitHubProfile, GitHubRepository } from '../../types/github'
 import { RepositoryModal } from '../../components/RepositoryModal/RepositoryModal'
-import { ProfileShell } from '../../components/ProfileShell/ProfileShell'
 import styles from './ProfilePage.module.css'
 
 type ProfileState =
