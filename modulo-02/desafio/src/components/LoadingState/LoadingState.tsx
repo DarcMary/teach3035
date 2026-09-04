@@ -1,5 +1,6 @@
 import { WtechLogo } from '../WtechLogo/WtechLogo'
 import styles from './LoadingState.module.css'
+import { ProfileShell } from '../ProfileShell/ProfileShell'
 
 export function LoadingState() {
   return (
