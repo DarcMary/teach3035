@@ -53,10 +53,18 @@ it('keeps the desktop geometry while constraining logo and form widths at 375px 
     resolve(process.cwd(), 'src/components/SearchForm/SearchForm.module.css'),
     'utf8',
   )
+  const lightLogo = readFileSync(
+    resolve(process.cwd(), 'src/assets/wtech-logo-light.svg'),
+    'utf8',
+  )
 
   expect(logoStyles).toContain('width: min(357px, 100%)')
   expect(logoStyles).toContain('height: auto')
   expect(searchPageStyles).toContain('width: min(318px, 100%)')
+  expect(searchPageStyles).toContain('color: #303030')
+  expect(searchPageStyles).toContain('text-align: center')
   expect(searchFormStyles).toContain('width: 100%')
   expect(searchFormStyles).toContain('max-width: 318px')
+  expect(searchFormStyles).toContain('font-weight: 400')
+  expect(lightLogo).toContain('fill="#FFB629"')
 })

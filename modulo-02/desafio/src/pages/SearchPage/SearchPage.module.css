@@ -2,7 +2,7 @@
 .brandPanel { display: grid; place-items: center; padding: 48px; background: var(--color-brand); }
 .searchPanel { display: grid; place-items: center; padding: 48px; }
 .searchContent { width: min(318px, 100%); }
-.searchContent h1 { margin: 0 0 42px; color: var(--color-brand); font-size: 40px; font-weight: 700; line-height: 1.2; }
+.searchContent h1 { margin: 0 0 42px; color: #303030; font-size: 40px; font-weight: 700; line-height: 1.2; text-align: center; }
 .error { margin: -26px 0 18px; color: var(--color-danger); font-size: 0.875rem; line-height: 1.4; }
 @media (max-width: 960px) { .page { grid-template-columns: minmax(280px, 1fr) minmax(360px, 1fr); } }
 @media (max-width: 700px) { .page { grid-template-columns: 1fr; } .brandPanel { min-height: 30vh; padding: 32px; } .searchPanel { min-height: 70vh; padding: 40px 24px; } }
