@@ -1,4 +1,6 @@
 import { render, screen } from '@testing-library/react'
+import { readFileSync } from 'node:fs'
+import { resolve } from 'node:path'
 import { useState } from 'react'
 import userEvent from '@testing-library/user-event'
 import { expect, it, vi } from 'vitest'
@@ -29,6 +31,15 @@ it('shows repository details and fallback values', () => {
     'href',
     repository.html_url,
   )
+})
+
+it('keeps a proportional gap between the modal heading and repository name', () => {
+  const styles = readFileSync(
+    resolve(process.cwd(), 'src/components/RepositoryModal/RepositoryModal.module.css'),
+    'utf8',
+  )
+
+  expect(styles).toContain('.heading { margin: 0 0 32px;')
 })
 
 it('closes when the close button is clicked', async () => {
