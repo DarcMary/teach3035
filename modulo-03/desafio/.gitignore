@@ -1,0 +1,16 @@
+# Java bytecode and build outputs
+*.class
+bin/
+build/
+out/
+target/
+
+# IDE metadata
+.idea/
+*.iml
+.classpath
+.project
+.settings/
+
+# Operating system files
+.DS_Store
