@@ -13,7 +13,18 @@ public class GuessingGameTest {
         generatesTargetInsideInclusiveRange();
         buildsDirectionalDistanceFeedback();
         handlesVictoryAndDefeatAttemptLimits();
+        calculatesScoresForWinsAndLosses();
         System.out.println("GuessingGameTest: PASS");
+    }
+
+    private static void calculatesScoresForWinsAndLosses() {
+        GuessingGame game = gameWithInput("");
+        assertEquals(540, game.calculateScore(100, 10, 1, true));
+        assertEquals(0, game.calculateScore(100, 10, 10, true));
+        assertEquals(490, game.calculateScore(200, 7, 1, true));
+        assertEquals(490, game.calculateScore(300, 5, 1, true));
+        assertEquals(0, game.calculateScore(300, 5, 5, false));
+        assertEquals(0, game.calculateScore(0, 1, 1, true));
     }
 
     private static void generatesTargetInsideInclusiveRange() {

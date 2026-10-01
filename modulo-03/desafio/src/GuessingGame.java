@@ -79,6 +79,8 @@ public class GuessingGame {
 
             if (guess == target) {
                 output.printf("Acertou em %d tentativa(s)!%n", attempt);
+                output.printf("Pontuação: %d%n",
+                        calculateScore(BASE_SCORES[difficultyIndex], attemptLimit, attempt, true));
                 return;
             }
 
@@ -86,6 +88,7 @@ public class GuessingGame {
         }
 
         output.printf("Suas tentativas acabaram. O número era %d.%n", target);
+        output.println("Pontuação: 0");
     }
 
     int generateTarget(int maximum) {
@@ -106,6 +109,16 @@ public class GuessingGame {
         }
 
         return String.format("Tente um número %s; você está %s.", direction, proximity);
+    }
+
+    int calculateScore(int baseScore, int maximumAttempts, int usedAttempts, boolean won) {
+        if (!won) {
+            return 0;
+        }
+
+        int unusedAttempts = maximumAttempts - usedAttempts;
+        int score = baseScore - (10 * usedAttempts) + (50 * unusedAttempts);
+        return Math.max(0, score);
     }
 
     private void printMainMenu() {
