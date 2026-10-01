@@ -32,7 +32,7 @@ public class GuessingGame {
                     int difficulty = selectDifficulty();
                     playRound(difficulty);
                 }
-                case 2 -> output.println("Funcionalidade disponível em uma próxima etapa.");
+                case 2 -> printRules();
                 case 3 -> history.printTo(output);
                 case 4 -> {
                     output.println("Até a próxima!");
@@ -124,6 +124,20 @@ public class GuessingGame {
         int unusedAttempts = maximumAttempts - usedAttempts;
         int score = baseScore - (10 * usedAttempts) + (50 * unusedAttempts);
         return Math.max(0, score);
+    }
+
+    void printRules() {
+        output.println("\n=== Regras ===");
+        output.println("Escolha uma dificuldade e tente descobrir o número sorteado:");
+        for (int index = 0; index < DIFFICULTY_NAMES.length; index++) {
+            output.printf("- %s: 1 a %d, %d tentativas, %d pontos de base%n",
+                    DIFFICULTY_NAMES[index], MAX_NUMBERS[index], MAX_ATTEMPTS[index], BASE_SCORES[index]);
+        }
+        output.println("A pontuação desconta 10 pontos por tentativa usada.");
+        output.println("Você recebe 50 pontos por tentativa não utilizada.");
+        output.println("Após um erro, o jogo informa se o número é maior ou menor e sua proximidade.");
+        output.println("As 10 últimas pontuações ficam disponíveis no histórico.");
+        output.println("Uma derrota registra 0 pontos.");
     }
 
     private void printMainMenu() {

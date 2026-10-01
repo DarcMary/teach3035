@@ -10,7 +10,19 @@ public class GameFlowTest {
         exitsFromMainMenu();
         retriesInvalidMainMenuInput();
         showsEmptyScoreHistory();
+        displaysCompleteRules();
         System.out.println("GameFlowTest: PASS");
+    }
+
+    private static void displaysCompleteRules() {
+        String output = runGame("2\n4\n");
+        assertContains(output, "Fácil: 1 a 50, 10 tentativas, 100 pontos de base");
+        assertContains(output, "Médio: 1 a 100, 7 tentativas, 200 pontos de base");
+        assertContains(output, "Difícil: 1 a 200, 5 tentativas, 300 pontos de base");
+        assertContains(output, "10 pontos por tentativa usada");
+        assertContains(output, "50 pontos por tentativa não utilizada");
+        assertContains(output, "maior ou menor e sua proximidade");
+        assertContains(output, "10 últimas pontuações");
     }
 
     private static void showsEmptyScoreHistory() {
