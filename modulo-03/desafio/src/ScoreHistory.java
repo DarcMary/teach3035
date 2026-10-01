@@ -1,7 +1,7 @@
 import java.io.PrintStream;
 
 public class ScoreHistory {
-    private static final int CAPACITY = 10;
+    static final int CAPACITY = 10;
 
     private final String[] difficulties = new String[CAPACITY];
     private final int[] scores = new int[CAPACITY];

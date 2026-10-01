@@ -7,6 +7,11 @@ public class GuessingGame {
     static final int[] MAX_NUMBERS = {50, 100, 200};
     static final int[] MAX_ATTEMPTS = {10, 7, 5};
     static final int[] BASE_SCORES = {100, 200, 300};
+    private static final int PERCENT_SCALE = 100;
+    private static final int VERY_CLOSE_PERCENT = 10;
+    private static final int CLOSE_PERCENT = 25;
+    private static final int POINTS_PER_USED_ATTEMPT = 10;
+    private static final int BONUS_PER_UNUSED_ATTEMPT = 50;
 
     private final Scanner input;
     private final Random random;
@@ -83,8 +88,7 @@ public class GuessingGame {
             if (guess == target) {
                 int score = calculateScore(BASE_SCORES[difficultyIndex], attemptLimit, attempt, true);
                 output.printf("Acertou em %d tentativa(s)!%n", attempt);
-                output.printf("Pontuação: %d%n", score);
-                history.add(DIFFICULTY_NAMES[difficultyIndex], score);
+                recordScore(difficultyIndex, score);
                 return;
             }
 
@@ -92,8 +96,7 @@ public class GuessingGame {
         }
 
         output.printf("Suas tentativas acabaram. O número era %d.%n", target);
-        output.println("Pontuação: 0");
-        history.add(DIFFICULTY_NAMES[difficultyIndex], 0);
+        recordScore(difficultyIndex, 0);
     }
 
     int generateTarget(int maximum) {
@@ -105,9 +108,9 @@ public class GuessingGame {
         String direction = target > guess ? "maior" : "menor";
         String proximity;
 
-        if (distance * 100 <= maximum * 10) {
+        if (distance * PERCENT_SCALE <= maximum * VERY_CLOSE_PERCENT) {
             proximity = "muito perto";
-        } else if (distance * 100 <= maximum * 25) {
+        } else if (distance * PERCENT_SCALE <= maximum * CLOSE_PERCENT) {
             proximity = "perto";
         } else {
             proximity = "longe";
@@ -122,8 +125,15 @@ public class GuessingGame {
         }
 
         int unusedAttempts = maximumAttempts - usedAttempts;
-        int score = baseScore - (10 * usedAttempts) + (50 * unusedAttempts);
+        int score = baseScore
+                - (POINTS_PER_USED_ATTEMPT * usedAttempts)
+                + (BONUS_PER_UNUSED_ATTEMPT * unusedAttempts);
         return Math.max(0, score);
+    }
+
+    private void recordScore(int difficultyIndex, int score) {
+        output.printf("Pontuação: %d%n", score);
+        history.add(DIFFICULTY_NAMES[difficultyIndex], score);
     }
 
     void printRules() {
@@ -133,10 +143,10 @@ public class GuessingGame {
             output.printf("- %s: 1 a %d, %d tentativas, %d pontos de base%n",
                     DIFFICULTY_NAMES[index], MAX_NUMBERS[index], MAX_ATTEMPTS[index], BASE_SCORES[index]);
         }
-        output.println("A pontuação desconta 10 pontos por tentativa usada.");
-        output.println("Você recebe 50 pontos por tentativa não utilizada.");
+        output.printf("A pontuação desconta %d pontos por tentativa usada.%n", POINTS_PER_USED_ATTEMPT);
+        output.printf("Você recebe %d pontos por tentativa não utilizada.%n", BONUS_PER_UNUSED_ATTEMPT);
         output.println("Após um erro, o jogo informa se o número é maior ou menor e sua proximidade.");
-        output.println("As 10 últimas pontuações ficam disponíveis no histórico.");
+        output.printf("As %d últimas pontuações ficam disponíveis no histórico.%n", ScoreHistory.CAPACITY);
         output.println("Uma derrota registra 0 pontos.");
     }
 
