@@ -9,7 +9,14 @@ public class GameFlowTest {
     public static void main(String[] args) {
         exitsFromMainMenu();
         retriesInvalidMainMenuInput();
+        showsEmptyScoreHistory();
         System.out.println("GameFlowTest: PASS");
+    }
+
+    private static void showsEmptyScoreHistory() {
+        String output = runGame("3\n4\n");
+        assertContains(output, "=== Histórico de Pontuações ===");
+        assertContains(output, "Nenhuma partida registrada.");
     }
 
     private static void retriesInvalidMainMenuInput() {
@@ -31,7 +38,8 @@ public class GameFlowTest {
     private static String runGame(String inputText) {
         ByteArrayInputStream input = new ByteArrayInputStream(inputText.getBytes(StandardCharsets.UTF_8));
         ByteArrayOutputStream output = new ByteArrayOutputStream();
-        GuessingGame game = new GuessingGame(new Scanner(input), new Random(0), new PrintStream(output));
+        GuessingGame game = new GuessingGame(
+                new Scanner(input), new Random(0), new PrintStream(output), new ScoreHistory());
         game.run();
         return output.toString(StandardCharsets.UTF_8);
     }

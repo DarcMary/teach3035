@@ -11,11 +11,13 @@ public class GuessingGame {
     private final Scanner input;
     private final Random random;
     private final PrintStream output;
+    private final ScoreHistory history;
 
-    GuessingGame(Scanner input, Random random, PrintStream output) {
+    GuessingGame(Scanner input, Random random, PrintStream output, ScoreHistory history) {
         this.input = input;
         this.random = random;
         this.output = output;
+        this.history = history;
     }
 
     void run() {
@@ -30,7 +32,8 @@ public class GuessingGame {
                     int difficulty = selectDifficulty();
                     playRound(difficulty);
                 }
-                case 2, 3 -> output.println("Funcionalidade disponível em uma próxima etapa.");
+                case 2 -> output.println("Funcionalidade disponível em uma próxima etapa.");
+                case 3 -> history.printTo(output);
                 case 4 -> {
                     output.println("Até a próxima!");
                     running = false;
@@ -78,9 +81,10 @@ public class GuessingGame {
                     String.format("Tentativa %d de %d: ", attempt, attemptLimit), 1, maximum);
 
             if (guess == target) {
+                int score = calculateScore(BASE_SCORES[difficultyIndex], attemptLimit, attempt, true);
                 output.printf("Acertou em %d tentativa(s)!%n", attempt);
-                output.printf("Pontuação: %d%n",
-                        calculateScore(BASE_SCORES[difficultyIndex], attemptLimit, attempt, true));
+                output.printf("Pontuação: %d%n", score);
+                history.add(DIFFICULTY_NAMES[difficultyIndex], score);
                 return;
             }
 
@@ -89,6 +93,7 @@ public class GuessingGame {
 
         output.printf("Suas tentativas acabaram. O número era %d.%n", target);
         output.println("Pontuação: 0");
+        history.add(DIFFICULTY_NAMES[difficultyIndex], 0);
     }
 
     int generateTarget(int maximum) {

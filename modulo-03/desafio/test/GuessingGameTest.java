@@ -14,7 +14,18 @@ public class GuessingGameTest {
         buildsDirectionalDistanceFeedback();
         handlesVictoryAndDefeatAttemptLimits();
         calculatesScoresForWinsAndLosses();
+        recordsCompletedRoundInHistory();
         System.out.println("GuessingGameTest: PASS");
+    }
+
+    private static void recordsCompletedRoundInHistory() {
+        ScoreHistory history = new ScoreHistory();
+        ByteArrayInputStream input = new ByteArrayInputStream("50\n".getBytes(StandardCharsets.UTF_8));
+        GuessingGame game = new GuessingGame(
+                new Scanner(input), new FixedRandom(49),
+                new PrintStream(new ByteArrayOutputStream()), history);
+        game.playRound(0);
+        assertEquals(1, history.size());
     }
 
     private static void calculatesScoresForWinsAndLosses() {
@@ -72,14 +83,15 @@ public class GuessingGameTest {
 
     private static GuessingGame gameWithInputAndRandom(String text, Random random) {
         ByteArrayInputStream input = new ByteArrayInputStream(text.getBytes(StandardCharsets.UTF_8));
-        return new GuessingGame(new Scanner(input), random, new PrintStream(new ByteArrayOutputStream()));
+        return new GuessingGame(
+                new Scanner(input), random, new PrintStream(new ByteArrayOutputStream()), new ScoreHistory());
     }
 
     private static String runRound(String text, int nextRandomValue, int difficulty) {
         ByteArrayInputStream input = new ByteArrayInputStream(text.getBytes(StandardCharsets.UTF_8));
         ByteArrayOutputStream output = new ByteArrayOutputStream();
         GuessingGame game = new GuessingGame(
-                new Scanner(input), new FixedRandom(nextRandomValue), new PrintStream(output));
+                new Scanner(input), new FixedRandom(nextRandomValue), new PrintStream(output), new ScoreHistory());
         game.playRound(difficulty);
         return output.toString(StandardCharsets.UTF_8);
     }
