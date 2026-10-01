@@ -23,19 +23,18 @@ public class GuessingGame {
 
         while (running) {
             printMainMenu();
-            String option = input.nextLine().trim();
+            int option = readIntInRange("", 1, 4);
 
             switch (option) {
-                case "1" -> {
+                case 1 -> {
                     int difficulty = selectDifficulty();
                     output.println("Dificuldade selecionada: " + DIFFICULTY_NAMES[difficulty]);
                 }
-                case "2", "3" -> output.println("Funcionalidade disponível em uma próxima etapa.");
-                case "4" -> {
+                case 2, 3 -> output.println("Funcionalidade disponível em uma próxima etapa.");
+                case 4 -> {
                     output.println("Até a próxima!");
                     running = false;
                 }
-                default -> output.println("Opção inválida.");
             }
         }
     }
@@ -45,8 +44,25 @@ public class GuessingGame {
         for (int index = 0; index < DIFFICULTY_NAMES.length; index++) {
             output.printf("%d. %s%n", index + 1, DIFFICULTY_NAMES[index]);
         }
-        output.print("Opção: ");
-        return Integer.parseInt(input.nextLine().trim()) - 1;
+        return readIntInRange("Opção: ", 1, DIFFICULTY_NAMES.length) - 1;
+    }
+
+    int readIntInRange(String prompt, int minimum, int maximum) {
+        while (true) {
+            output.print(prompt);
+            String value = input.nextLine().trim();
+
+            try {
+                int number = Integer.parseInt(value);
+                if (number >= minimum && number <= maximum) {
+                    return number;
+                }
+            } catch (NumberFormatException ignored) {
+                // A mensagem abaixo também atende entradas que não são números inteiros.
+            }
+
+            output.printf("Digite um número inteiro entre %d e %d.%n", minimum, maximum);
+        }
     }
 
     private void printMainMenu() {

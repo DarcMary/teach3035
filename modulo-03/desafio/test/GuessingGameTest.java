@@ -9,7 +9,13 @@ public class GuessingGameTest {
     public static void main(String[] args) {
         exposesRequiredDifficultyConfiguration();
         selectsDifficultyByArrayIndex();
+        retriesUntilInputIsAnIntegerInRange();
         System.out.println("GuessingGameTest: PASS");
+    }
+
+    private static void retriesUntilInputIsAnIntegerInRange() {
+        GuessingGame game = gameWithInput("texto\n\n2.5\n0\n51\n7\n");
+        assertEquals(7, game.readIntInRange("Palpite: ", 1, 50));
     }
 
     private static void exposesRequiredDifficultyConfiguration() {

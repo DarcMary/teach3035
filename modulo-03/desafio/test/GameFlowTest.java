@@ -8,7 +8,14 @@ import java.util.Scanner;
 public class GameFlowTest {
     public static void main(String[] args) {
         exitsFromMainMenu();
+        retriesInvalidMainMenuInput();
         System.out.println("GameFlowTest: PASS");
+    }
+
+    private static void retriesInvalidMainMenuInput() {
+        String output = runGame("texto\n9\n4\n");
+        assertContains(output, "Digite um número inteiro entre 1 e 4.");
+        assertContains(output, "Até a próxima!");
     }
 
     private static void exitsFromMainMenu() {
