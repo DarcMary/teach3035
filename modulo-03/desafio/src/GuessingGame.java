@@ -28,7 +28,7 @@ public class GuessingGame {
             switch (option) {
                 case 1 -> {
                     int difficulty = selectDifficulty();
-                    output.println("Dificuldade selecionada: " + DIFFICULTY_NAMES[difficulty]);
+                    playRound(difficulty);
                 }
                 case 2, 3 -> output.println("Funcionalidade disponível em uma próxima etapa.");
                 case 4 -> {
@@ -63,6 +63,49 @@ public class GuessingGame {
 
             output.printf("Digite um número inteiro entre %d e %d.%n", minimum, maximum);
         }
+    }
+
+    void playRound(int difficultyIndex) {
+        int maximum = MAX_NUMBERS[difficultyIndex];
+        int attemptLimit = MAX_ATTEMPTS[difficultyIndex];
+        int target = generateTarget(maximum);
+
+        output.printf("%nDificuldade %s: adivinhe um número entre 1 e %d.%n",
+                DIFFICULTY_NAMES[difficultyIndex], maximum);
+
+        for (int attempt = 1; attempt <= attemptLimit; attempt++) {
+            int guess = readIntInRange(
+                    String.format("Tentativa %d de %d: ", attempt, attemptLimit), 1, maximum);
+
+            if (guess == target) {
+                output.printf("Acertou em %d tentativa(s)!%n", attempt);
+                return;
+            }
+
+            output.println(buildGuessFeedback(guess, target, maximum));
+        }
+
+        output.printf("Suas tentativas acabaram. O número era %d.%n", target);
+    }
+
+    int generateTarget(int maximum) {
+        return random.nextInt(maximum) + 1;
+    }
+
+    String buildGuessFeedback(int guess, int target, int maximum) {
+        int distance = Math.abs(target - guess);
+        String direction = target > guess ? "maior" : "menor";
+        String proximity;
+
+        if (distance * 100 <= maximum * 10) {
+            proximity = "muito perto";
+        } else if (distance * 100 <= maximum * 25) {
+            proximity = "perto";
+        } else {
+            proximity = "longe";
+        }
+
+        return String.format("Tente um número %s; você está %s.", direction, proximity);
     }
 
     private void printMainMenu() {

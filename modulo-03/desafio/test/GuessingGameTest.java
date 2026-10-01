@@ -10,7 +10,32 @@ public class GuessingGameTest {
         exposesRequiredDifficultyConfiguration();
         selectsDifficultyByArrayIndex();
         retriesUntilInputIsAnIntegerInRange();
+        generatesTargetInsideInclusiveRange();
+        buildsDirectionalDistanceFeedback();
+        handlesVictoryAndDefeatAttemptLimits();
         System.out.println("GuessingGameTest: PASS");
+    }
+
+    private static void generatesTargetInsideInclusiveRange() {
+        GuessingGame game = gameWithInputAndRandom("", new FixedRandom(49));
+        assertEquals(50, game.generateTarget(50));
+    }
+
+    private static void buildsDirectionalDistanceFeedback() {
+        GuessingGame game = gameWithInput("");
+        assertContains(game.buildGuessFeedback(45, 50, 100), "maior");
+        assertContains(game.buildGuessFeedback(45, 50, 100), "muito perto");
+        assertContains(game.buildGuessFeedback(70, 50, 100), "menor");
+        assertContains(game.buildGuessFeedback(70, 50, 100), "perto");
+        assertContains(game.buildGuessFeedback(1, 50, 100), "longe");
+    }
+
+    private static void handlesVictoryAndDefeatAttemptLimits() {
+        assertContains(runRound("50\n", 49, 0), "Acertou em 1 tentativa(s)!");
+        assertContains(runRound("1\n1\n1\n1\n1\n1\n1\n1\n1\n50\n", 49, 0),
+                "Acertou em 10 tentativa(s)!");
+        assertContains(runRound("1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n", 49, 0),
+                "Suas tentativas acabaram. O número era 50.");
     }
 
     private static void retriesUntilInputIsAnIntegerInRange() {
@@ -31,8 +56,21 @@ public class GuessingGameTest {
     }
 
     private static GuessingGame gameWithInput(String text) {
+        return gameWithInputAndRandom(text, new Random(0));
+    }
+
+    private static GuessingGame gameWithInputAndRandom(String text, Random random) {
         ByteArrayInputStream input = new ByteArrayInputStream(text.getBytes(StandardCharsets.UTF_8));
-        return new GuessingGame(new Scanner(input), new Random(0), new PrintStream(new ByteArrayOutputStream()));
+        return new GuessingGame(new Scanner(input), random, new PrintStream(new ByteArrayOutputStream()));
+    }
+
+    private static String runRound(String text, int nextRandomValue, int difficulty) {
+        ByteArrayInputStream input = new ByteArrayInputStream(text.getBytes(StandardCharsets.UTF_8));
+        ByteArrayOutputStream output = new ByteArrayOutputStream();
+        GuessingGame game = new GuessingGame(
+                new Scanner(input), new FixedRandom(nextRandomValue), new PrintStream(output));
+        game.playRound(difficulty);
+        return output.toString(StandardCharsets.UTF_8);
     }
 
     private static void assertArrayEquals(int[] expected, int[] actual) {
@@ -50,6 +88,28 @@ public class GuessingGameTest {
     private static void assertEquals(int expected, int actual) {
         if (expected != actual) {
             throw new AssertionError("Esperava " + expected + ", mas recebeu " + actual);
+        }
+    }
+
+    private static void assertContains(String actual, String expected) {
+        if (!actual.contains(expected)) {
+            throw new AssertionError("Esperava encontrar: " + expected + "\nValor:\n" + actual);
+        }
+    }
+
+    private static class FixedRandom extends Random {
+        private final int value;
+
+        FixedRandom(int value) {
+            this.value = value;
+        }
+
+        @Override
+        public int nextInt(int bound) {
+            if (value < 0 || value >= bound) {
+                throw new AssertionError("Valor aleatório fora do limite do teste");
+            }
+            return value;
         }
     }
 }
