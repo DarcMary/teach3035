@@ -121,6 +121,7 @@ public class GuessingGameTest {
     }
 
     private static class FixedRandom extends Random {
+        private static final long serialVersionUID = 1L;
         private final int value;
 
         FixedRandom(int value) {
