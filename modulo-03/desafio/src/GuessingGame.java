@@ -271,6 +271,17 @@ public class GuessingGame {
         output.println("Após um erro, o jogo informa se o número é maior ou menor e sua proximidade.");
         output.printf("As %d últimas pontuações ficam disponíveis no histórico.%n", ScoreHistory.CAPACITY);
         output.println("Uma derrota registra 0 pontos.");
+        output.println("Sequência: acerte 3 números em ordem; as tentativas reiniciam a cada número.");
+        output.println("A sequência soma as pontuações dos três números; qualquer derrota vale zero.");
+        output.println("Digite d no palpite para comprar uma dica sem consumir uma tentativa.");
+        output.printf("Paridade: %d; intervalo: %d; proximidade: %d pontos.%n",
+                HINT_COSTS[0], HINT_COSTS[1], HINT_COSTS[2]);
+        output.println("Cada dica pode ser comprada uma vez por número; 0 cancela a compra.");
+        output.println("Proximidade usa o último palpite: até 25% do limite é quente; acima disso é frio.");
+        output.println("O custo é descontado da pontuação final, limitada a zero.");
+        output.println("A compra exige saldo na pontuação projetada caso você acerte agora.");
+        output.println("Recordes separados por dificuldade e modo consideram apenas vitórias.");
+        output.println("Histórico e recordes são mantidos apenas durante esta sessão.");
     }
 
     private void printMainMenu() {

@@ -23,6 +23,9 @@ public class GameFlowTest {
         assertContains(output, "50 pontos por tentativa não utilizada");
         assertContains(output, "maior ou menor e sua proximidade");
         assertContains(output, "10 últimas pontuações");
+        assertContains(output, "3 números em ordem");
+        assertContains(output, "Paridade: 10; intervalo: 20; proximidade: 15 pontos.");
+        assertContains(output, "Recordes separados por dificuldade e modo");
     }
 
     private static void showsEmptyScoreHistory() {

@@ -12,28 +12,32 @@
 
 ## Etapa 1 — Sequência
 
-- [ ] Testar três acertos, repetição de números, derrota na segunda posição, limites e um único resultado no histórico.
-- [ ] Implementar `playSequence(int difficultyIndex)` e integrar opção 5 ao menu.
-- [ ] Reexecutar testes da versão obrigatória.
-- [ ] Commit: `feat(sequence): add three-number game mode`.
+- [x] Testar três acertos, repetição de números, derrota na segunda posição, limites e um único resultado no histórico.
+- [x] Implementar `playSequence(int difficultyIndex)` e integrar opção 5 ao menu.
+- [x] Reexecutar testes da versão obrigatória.
+- [x] Commit: `feat(sequence): add three-number game mode`.
 
 ## Etapa 2 — Dicas
 
-- [ ] Testar custos exatos, cancelamento, dicas repetidas, proximidade antes do primeiro palpite, saldo insuficiente, validade da informação e desconto antes do limite zero.
-- [ ] Implementar menu de dicas nos dois modos usando arrays de custos e estados de compra.
-- [ ] Verificar que entradas inválidas e dicas não consomem tentativas; redefinir o estado por número.
-- [ ] Commit: `feat(hints): add point-cost hint system`.
+- [x] Testar custos exatos, cancelamento, dicas repetidas, proximidade antes do primeiro palpite, saldo insuficiente, validade da informação e desconto antes do limite zero.
+- [x] Implementar menu de dicas nos dois modos usando arrays de custos e estados de compra.
+- [x] Verificar que entradas inválidas e dicas não consomem tentativas; redefinir o estado por número.
+- [x] Commit: `feat(hints): add point-cost hint system`.
 
 ## Etapa 3 — Recordes
 
-- [ ] Testar recordes vazios, primeira vitória, empate, resultado inferior, derrota, modos/dificuldades independentes e retenção após 11 partidas.
-- [ ] Implementar `HighScores` e integrar registro de vitórias e opção 6.
-- [ ] Commit: `feat(records): track high scores by difficulty`.
+- [x] Testar recordes vazios, primeira vitória, empate, resultado inferior, derrota, modos/dificuldades independentes e retenção após 11 partidas.
+- [x] Implementar `HighScores` e integrar registro de vitórias e opção 6.
+- [x] Commit: `feat(records): track high scores by difficulty`.
 
 ## Etapa 4 — Documentação e validação
 
-- [ ] Atualizar regras e README com comandos, custos, sequência, pontuação e duração dos dados.
-- [ ] Compilar com JDK 17 compatível: `javac --release 17 -Xlint:all -Werror -d out src/*.java test/*.java`.
-- [ ] Executar todas as classes `*Test` e verificar o fluxo pelo console.
-- [ ] Revisar diff e arquivos incluídos em cada commit.
-- [ ] Commit: `docs: document optional game challenges`.
+- [x] Atualizar regras e README com comandos, custos, sequência, pontuação e duração dos dados.
+- [x] Compilar com JDK 17 compatível: `javac --release 17 -Xlint:all -Werror -d out src/*.java test/*.java`.
+- [x] Executar todas as classes `*Test` e verificar o fluxo pelo console.
+- [x] Revisar diff e arquivos incluídos em cada commit.
+- [x] Commit: `docs: document optional game challenges`.
+
+## Validação final
+
+As cinco suítes (`GuessingGameTest`, `ScoreHistoryTest`, `GameFlowTest`, `OptionalGameTest` e `HighScoresTest`) passaram com compilação compatível com Java 17 e sem avisos. A revisão independente do código não encontrou divergências com o plano. Os dados de histórico e recordes permanecem em memória durante a sessão.

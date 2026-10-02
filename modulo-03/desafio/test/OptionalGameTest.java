@@ -14,7 +14,37 @@ public class OptionalGameTest {
         sequenceResetsHintsBetweenNumbers();
         recordsWinsButNotLossesAndSurvivesHistoryEviction();
         menuSupportsBothModesAndRecords();
+        hintsHandleUpperBoundaryAndInvalidEntries();
+        hintDeductionsNeverCreateNegativeScores();
+        zeroPointSequencePositionIsStillAWinner();
         System.out.println("OptionalGameTest: PASS");
+    }
+
+    private static void hintsHandleUpperBoundaryAndInvalidEntries() {
+        Fixture fixture = new Fixture("texto\n0\n51\nd\ntexto\n9\n1\nd\n2\n50\n", 50);
+        fixture.game.playRound(0);
+        contains(fixture.output(), "O número é par.");
+        contains(fixture.output(), "metade superior (26 a 50)");
+        contains(fixture.output(), "Acertou em 1 tentativa(s)!");
+        contains(fixture.output(), "Pontuação: 510");
+    }
+
+    private static void hintDeductionsNeverCreateNegativeScores() {
+        Fixture fixture = new Fixture("d\n1\n" + "1\n".repeat(9) + "25\n", 25);
+        fixture.game.playRound(0);
+        contains(fixture.output(), "Pontuação: 0");
+    }
+
+    private static void zeroPointSequencePositionIsStillAWinner() {
+        Fixture fixture = new Fixture("1\n".repeat(9) + "5\n8\n2\n", 5, 8, 2);
+        fixture.game.playSequence(0);
+        contains(fixture.output(), "Sequência concluída!");
+        contains(fixture.output(), "Pontuação: 1080");
+        equals(1080, fixture.records.best(HighScores.SEQUENCE, 0));
+        Fixture loser = new Fixture("5\n8\n" + "1\n".repeat(10), 5, 8, 2);
+        loser.game.playSequence(0);
+        contains(loser.output(), "Pontuação: 0");
+        equals(-1, loser.records.best(HighScores.SEQUENCE, 0));
     }
 
     private static void recordsWinsButNotLossesAndSurvivesHistoryEviction() {
