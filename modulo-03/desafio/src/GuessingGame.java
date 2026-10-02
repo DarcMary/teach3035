@@ -89,7 +89,7 @@ public class GuessingGame {
         output.printf("%nDificuldade %s: adivinhe um número entre 1 e %d.%n",
                 DIFFICULTY_NAMES[difficultyIndex], maximum);
         int score = guessNumber(difficultyIndex, target);
-        recordScore(difficultyIndex, HighScores.CLASSIC, Math.max(0, score), score >= 0);
+        recordScore(difficultyIndex, HighScores.CLASSIC, score, score >= 0);
     }
 
     void playSequence(int difficultyIndex) {
@@ -130,13 +130,13 @@ public class GuessingGame {
                     break;
                 }
                 int availablePoints = Math.max(0,
-                        rawScore(BASE_SCORES[difficultyIndex], attemptLimit, attempt) - hintCost);
+                        calculateScore(BASE_SCORES[difficultyIndex], attemptLimit, attempt, true) - hintCost);
                 hintCost += purchaseHint(target, maximum, lastGuess, purchasedHints, availablePoints);
             }
 
             if (guess == target) {
                 int score = Math.max(0,
-                        rawScore(BASE_SCORES[difficultyIndex], attemptLimit, attempt) - hintCost);
+                        calculateScore(BASE_SCORES[difficultyIndex], attemptLimit, attempt, true) - hintCost);
                 output.printf("Acertou em %d tentativa(s)!%n", attempt);
                 return score;
             }
@@ -248,14 +248,15 @@ public class GuessingGame {
     }
 
     private void recordScore(int difficultyIndex, int mode, int score, boolean won) {
-        output.printf("Pontuação: %d%n", score);
+        int finalScore = Math.max(0, score);
+        output.printf("Pontuação: %d%n", finalScore);
         String label = DIFFICULTY_NAMES[difficultyIndex];
         if (mode == HighScores.SEQUENCE) {
             label += " (Sequência)";
         }
-        history.add(label, score);
+        history.add(label, finalScore);
         if (won) {
-            records.record(mode, difficultyIndex, score);
+            records.record(mode, difficultyIndex, finalScore);
         }
     }
 

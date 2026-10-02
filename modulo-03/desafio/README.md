@@ -136,7 +136,6 @@ desafio/
 │   ├── GameFlowTest.java
 │   ├── OptionalGameTest.java
 │   └── HighScoresTest.java
-├── docs/superpowers/plans/
 ├── .gitignore
 └── README.md
 ```
