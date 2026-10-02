@@ -30,7 +30,7 @@ public class GuessingGame {
 
         while (running) {
             printMainMenu();
-            int option = readIntInRange("", 1, 4);
+            int option = readIntInRange("", 1, 5);
 
             switch (option) {
                 case 1 -> {
@@ -43,6 +43,7 @@ public class GuessingGame {
                     output.println("Até a próxima!");
                     running = false;
                 }
+                case 5 -> playSequence(selectDifficulty());
             }
         }
     }
@@ -75,11 +76,40 @@ public class GuessingGame {
 
     void playRound(int difficultyIndex) {
         int maximum = MAX_NUMBERS[difficultyIndex];
-        int attemptLimit = MAX_ATTEMPTS[difficultyIndex];
         int target = generateTarget(maximum);
 
         output.printf("%nDificuldade %s: adivinhe um número entre 1 e %d.%n",
                 DIFFICULTY_NAMES[difficultyIndex], maximum);
+        int score = guessNumber(difficultyIndex, target);
+        recordScore(difficultyIndex, Math.max(0, score));
+    }
+
+    void playSequence(int difficultyIndex) {
+        int[] targets = new int[3];
+        for (int index = 0; index < targets.length; index++) {
+            targets[index] = generateTarget(MAX_NUMBERS[difficultyIndex]);
+        }
+
+        int totalScore = 0;
+        for (int index = 0; index < targets.length; index++) {
+            output.printf("%nNúmero %d de %d: intervalo de 1 a %d.%n",
+                    index + 1, targets.length, MAX_NUMBERS[difficultyIndex]);
+            int score = guessNumber(difficultyIndex, targets[index]);
+            if (score < 0) {
+                output.println("Sequência: " + java.util.Arrays.toString(targets));
+                recordSequenceScore(difficultyIndex, 0);
+                return;
+            }
+            totalScore += score;
+        }
+        output.println("Sequência concluída!");
+        recordSequenceScore(difficultyIndex, totalScore);
+    }
+
+    // -1 indica derrota; uma vitória pode valer zero pontos.
+    private int guessNumber(int difficultyIndex, int target) {
+        int maximum = MAX_NUMBERS[difficultyIndex];
+        int attemptLimit = MAX_ATTEMPTS[difficultyIndex];
 
         for (int attempt = 1; attempt <= attemptLimit; attempt++) {
             int guess = readIntInRange(
@@ -88,15 +118,14 @@ public class GuessingGame {
             if (guess == target) {
                 int score = calculateScore(BASE_SCORES[difficultyIndex], attemptLimit, attempt, true);
                 output.printf("Acertou em %d tentativa(s)!%n", attempt);
-                recordScore(difficultyIndex, score);
-                return;
+                return score;
             }
 
             output.println(buildGuessFeedback(guess, target, maximum));
         }
 
         output.printf("Suas tentativas acabaram. O número era %d.%n", target);
-        recordScore(difficultyIndex, 0);
+        return -1;
     }
 
     int generateTarget(int maximum) {
@@ -136,6 +165,11 @@ public class GuessingGame {
         history.add(DIFFICULTY_NAMES[difficultyIndex], score);
     }
 
+    private void recordSequenceScore(int difficultyIndex, int score) {
+        output.printf("Pontuação: %d%n", score);
+        history.add(DIFFICULTY_NAMES[difficultyIndex] + " (Sequência)", score);
+    }
+
     void printRules() {
         output.println("\n=== Regras ===");
         output.println("Escolha uma dificuldade e tente descobrir o número sorteado:");
@@ -156,6 +190,7 @@ public class GuessingGame {
         output.println("2. Ver regras");
         output.println("3. Ver histórico de pontuações");
         output.println("4. Sair");
+        output.println("5. Modo sequência");
         output.print("Escolha uma opção: ");
     }
 }
