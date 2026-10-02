@@ -4,7 +4,7 @@ Jogo de console desenvolvido em Java para praticar lógica de programação, arr
 
 ## Funcionalidades
 
-- Menu principal com novo jogo, regras, histórico e saída.
+- Menu principal com jogo clássico, regras, histórico, saída, modo sequência e recordes.
 - Três níveis de dificuldade configurados com arrays.
 - Palpites validados sem encerrar o programa em caso de erro.
 - Feedback de direção e proximidade após cada palpite incorreto.
@@ -42,6 +42,15 @@ O PDF determina o desconto por tentativa, mas não informa seu valor. O desconto
 ## Desafios adicionais
 
 No menu, a opção **5** inicia o modo sequência e a opção **6** exibe os recordes. As opções 1 a 4 continuam sendo novo jogo clássico, regras, histórico e saída.
+
+| Opção | Ação |
+| ---: | --- |
+| 1 | Iniciar jogo clássico |
+| 2 | Ver regras |
+| 3 | Ver histórico das 10 últimas partidas |
+| 4 | Sair |
+| 5 | Jogar modo sequência |
+| 6 | Consultar recordes |
 
 ### Modo sequência
 
@@ -83,14 +92,15 @@ Além de informar se o número correto é maior ou menor, o jogo compara a dist�
 
 Nenhuma biblioteca externa é necessária.
 
+Para conferir a instalação do Java, execute `java -version` e `javac -version` no terminal.
+
 ## Compilar
 
-Na pasta `desafio`:
+Na pasta `modulo-03/desafio`, compile o programa e os testes para a pasta ignorada `out/`:
 
 ```bash
-rm -rf out
 mkdir -p out
-javac -d out src/*.java test/*.java
+javac --release 17 -d out src/*.java test/*.java
 ```
 
 ## Executar
@@ -109,7 +119,7 @@ java -ea -cp out OptionalGameTest
 java -ea -cp out HighScoresTest
 ```
 
-Cada classe imprime `PASS` quando todos os cenários são concluídos. Os testes cobrem configurações de dificuldade, entradas inválidas, limites do número sorteado, feedback, vitória, derrota, pontuação, regras e limite do histórico.
+Cada classe imprime `PASS` quando todos os cenários são concluídos. Os testes cobrem configurações de dificuldade, entradas inválidas, limites do número sorteado, feedback, vitória, derrota, pontuação, dicas, sequência, recordes, regras e limite do histórico.
 
 ## Estrutura
 
