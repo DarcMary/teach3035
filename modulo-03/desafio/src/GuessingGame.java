@@ -12,6 +12,7 @@ public class GuessingGame {
     private static final int CLOSE_PERCENT = 25;
     private static final int POINTS_PER_USED_ATTEMPT = 10;
     private static final int BONUS_PER_UNUSED_ATTEMPT = 50;
+    private static final int[] HINT_COSTS = {10, 20, 15};
 
     private final Scanner input;
     private final Random random;
@@ -110,22 +111,98 @@ public class GuessingGame {
     private int guessNumber(int difficultyIndex, int target) {
         int maximum = MAX_NUMBERS[difficultyIndex];
         int attemptLimit = MAX_ATTEMPTS[difficultyIndex];
+        boolean[] purchasedHints = new boolean[HINT_COSTS.length];
+        int hintCost = 0;
+        int lastGuess = 0;
 
         for (int attempt = 1; attempt <= attemptLimit; attempt++) {
-            int guess = readIntInRange(
-                    String.format("Tentativa %d de %d: ", attempt, attemptLimit), 1, maximum);
+            int guess;
+            while (true) {
+                guess = readGuessOrHint(attempt, attemptLimit, maximum);
+                if (guess != 0) {
+                    break;
+                }
+                int availablePoints = Math.max(0,
+                        rawScore(BASE_SCORES[difficultyIndex], attemptLimit, attempt) - hintCost);
+                hintCost += purchaseHint(target, maximum, lastGuess, purchasedHints, availablePoints);
+            }
 
             if (guess == target) {
-                int score = calculateScore(BASE_SCORES[difficultyIndex], attemptLimit, attempt, true);
+                int score = Math.max(0,
+                        rawScore(BASE_SCORES[difficultyIndex], attemptLimit, attempt) - hintCost);
                 output.printf("Acertou em %d tentativa(s)!%n", attempt);
                 return score;
             }
 
             output.println(buildGuessFeedback(guess, target, maximum));
+            lastGuess = guess;
         }
 
         output.printf("Suas tentativas acabaram. O número era %d.%n", target);
         return -1;
+    }
+
+    // Zero é o comando de dicas; palpites válidos começam em 1.
+    private int readGuessOrHint(int attempt, int attemptLimit, int maximum) {
+        while (true) {
+            output.printf("Tentativa %d de %d (d para dicas): ", attempt, attemptLimit);
+            String value = input.nextLine().trim();
+            if (value.equalsIgnoreCase("d")) {
+                return 0;
+            }
+            try {
+                int guess = Integer.parseInt(value);
+                if (guess >= 1 && guess <= maximum) {
+                    return guess;
+                }
+            } catch (NumberFormatException ignored) {
+                // Repetir o campo sem consumir uma tentativa.
+            }
+            output.printf("Digite um número inteiro entre 1 e %d ou d para dicas.%n", maximum);
+        }
+    }
+
+    private int purchaseHint(int target, int maximum, int lastGuess,
+            boolean[] purchased, int availablePoints) {
+        output.printf("%nDicas - pontos disponíveis se acertar agora: %d%n", availablePoints);
+        output.println("0. Cancelar");
+        output.printf("1. Paridade (-%d pontos)%n", HINT_COSTS[0]);
+        output.printf("2. Intervalo (-%d pontos)%n", HINT_COSTS[1]);
+        output.printf("3. Proximidade (-%d pontos)%n", HINT_COSTS[2]);
+        int choice = readIntInRange("Dica: ", 0, HINT_COSTS.length);
+        if (choice == 0) {
+            return 0;
+        }
+        int index = choice - 1;
+        if (purchased[index]) {
+            output.println("Esta dica já foi comprada para este número.");
+            return 0;
+        }
+        if (choice == 3 && lastGuess == 0) {
+            output.println("Faça um palpite antes de pedir proximidade.");
+            return 0;
+        }
+        if (availablePoints < HINT_COSTS[index]) {
+            output.println("Pontos insuficientes para esta dica.");
+            return 0;
+        }
+        purchased[index] = true;
+        switch (choice) {
+            case 1 -> output.println("O número é " + (target % 2 == 0 ? "par." : "ímpar."));
+            case 2 -> {
+                int midpoint = maximum / 2;
+                if (target <= midpoint) {
+                    output.printf("O número está na metade inferior (1 a %d).%n", midpoint);
+                } else {
+                    output.printf("O número está na metade superior (%d a %d).%n", midpoint + 1, maximum);
+                }
+            }
+            case 3 -> {
+                boolean warm = Math.abs(target - lastGuess) * PERCENT_SCALE <= maximum * CLOSE_PERCENT;
+                output.println("Seu último palpite está " + (warm ? "quente." : "frio."));
+            }
+        }
+        return HINT_COSTS[index];
     }
 
     int generateTarget(int maximum) {
@@ -153,11 +230,14 @@ public class GuessingGame {
             return 0;
         }
 
+        return Math.max(0, rawScore(baseScore, maximumAttempts, usedAttempts));
+    }
+
+    private int rawScore(int baseScore, int maximumAttempts, int usedAttempts) {
         int unusedAttempts = maximumAttempts - usedAttempts;
-        int score = baseScore
+        return baseScore
                 - (POINTS_PER_USED_ATTEMPT * usedAttempts)
                 + (BONUS_PER_UNUSED_ATTEMPT * unusedAttempts);
-        return Math.max(0, score);
     }
 
     private void recordScore(int difficultyIndex, int score) {

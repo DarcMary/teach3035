@@ -8,7 +8,47 @@ public class OptionalGameTest {
     public static void main(String[] args) {
         sequenceWinsAndRecordsOnlyOneResult();
         sequenceLossRecordsZero();
+        hintsChargeOnceWithoutUsingAttempts();
+        proximityRequiresPreviousGuess();
+        hintsRejectInsufficientPoints();
+        sequenceResetsHintsBetweenNumbers();
         System.out.println("OptionalGameTest: PASS");
+    }
+
+    private static void hintsChargeOnceWithoutUsingAttempts() {
+        Fixture fixture = new Fixture("d\n0\nd\n1\nd\n1\nd\n2\n25\n", 25);
+        fixture.game.playRound(0);
+        contains(fixture.output(), "O número é ímpar.");
+        contains(fixture.output(), "metade inferior (1 a 25)");
+        contains(fixture.output(), "Esta dica já foi comprada");
+        contains(fixture.output(), "Acertou em 1 tentativa(s)!");
+        contains(fixture.output(), "Pontuação: 510");
+    }
+
+    private static void proximityRequiresPreviousGuess() {
+        Fixture fixture = new Fixture("d\n3\n1\nd\n3\n25\n", 25);
+        fixture.game.playRound(0);
+        contains(fixture.output(), "Faça um palpite antes");
+        contains(fixture.output(), "frio");
+        contains(fixture.output(), "Pontuação: 465");
+        Fixture warm = new Fixture("20\nd\n3\n25\n", 25);
+        warm.game.playRound(0);
+        contains(warm.output(), "quente");
+        contains(warm.output(), "Pontuação: 465");
+    }
+
+    private static void hintsRejectInsufficientPoints() {
+        Fixture fixture = new Fixture("1\n".repeat(9) + "d\n1\n25\n", 25);
+        fixture.game.playRound(0);
+        contains(fixture.output(), "Pontos insuficientes");
+        contains(fixture.output(), "Acertou em 10 tentativa(s)!");
+        contains(fixture.output(), "Pontuação: 0");
+    }
+
+    private static void sequenceResetsHintsBetweenNumbers() {
+        Fixture fixture = new Fixture("d\n1\n5\nd\n1\n8\nd\n1\n2\n", 5, 8, 2);
+        fixture.game.playSequence(0);
+        contains(fixture.output(), "Pontuação: 1590");
     }
 
     private static void sequenceWinsAndRecordsOnlyOneResult() {
