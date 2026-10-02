@@ -18,12 +18,18 @@ public class GuessingGame {
     private final Random random;
     private final PrintStream output;
     private final ScoreHistory history;
+    private final HighScores records;
 
     GuessingGame(Scanner input, Random random, PrintStream output, ScoreHistory history) {
+        this(input, random, output, history, new HighScores());
+    }
+
+    GuessingGame(Scanner input, Random random, PrintStream output, ScoreHistory history, HighScores records) {
         this.input = input;
         this.random = random;
         this.output = output;
         this.history = history;
+        this.records = records;
     }
 
     void run() {
@@ -31,7 +37,7 @@ public class GuessingGame {
 
         while (running) {
             printMainMenu();
-            int option = readIntInRange("", 1, 5);
+            int option = readIntInRange("", 1, 6);
 
             switch (option) {
                 case 1 -> {
@@ -45,6 +51,7 @@ public class GuessingGame {
                     running = false;
                 }
                 case 5 -> playSequence(selectDifficulty());
+                case 6 -> records.printTo(output);
             }
         }
     }
@@ -82,7 +89,7 @@ public class GuessingGame {
         output.printf("%nDificuldade %s: adivinhe um número entre 1 e %d.%n",
                 DIFFICULTY_NAMES[difficultyIndex], maximum);
         int score = guessNumber(difficultyIndex, target);
-        recordScore(difficultyIndex, Math.max(0, score));
+        recordScore(difficultyIndex, HighScores.CLASSIC, Math.max(0, score), score >= 0);
     }
 
     void playSequence(int difficultyIndex) {
@@ -98,13 +105,13 @@ public class GuessingGame {
             int score = guessNumber(difficultyIndex, targets[index]);
             if (score < 0) {
                 output.println("Sequência: " + java.util.Arrays.toString(targets));
-                recordSequenceScore(difficultyIndex, 0);
+                recordScore(difficultyIndex, HighScores.SEQUENCE, 0, false);
                 return;
             }
             totalScore += score;
         }
         output.println("Sequência concluída!");
-        recordSequenceScore(difficultyIndex, totalScore);
+        recordScore(difficultyIndex, HighScores.SEQUENCE, totalScore, true);
     }
 
     // -1 indica derrota; uma vitória pode valer zero pontos.
@@ -240,14 +247,16 @@ public class GuessingGame {
                 + (BONUS_PER_UNUSED_ATTEMPT * unusedAttempts);
     }
 
-    private void recordScore(int difficultyIndex, int score) {
+    private void recordScore(int difficultyIndex, int mode, int score, boolean won) {
         output.printf("Pontuação: %d%n", score);
-        history.add(DIFFICULTY_NAMES[difficultyIndex], score);
-    }
-
-    private void recordSequenceScore(int difficultyIndex, int score) {
-        output.printf("Pontuação: %d%n", score);
-        history.add(DIFFICULTY_NAMES[difficultyIndex] + " (Sequência)", score);
+        String label = DIFFICULTY_NAMES[difficultyIndex];
+        if (mode == HighScores.SEQUENCE) {
+            label += " (Sequência)";
+        }
+        history.add(label, score);
+        if (won) {
+            records.record(mode, difficultyIndex, score);
+        }
     }
 
     void printRules() {
@@ -271,6 +280,7 @@ public class GuessingGame {
         output.println("3. Ver histórico de pontuações");
         output.println("4. Sair");
         output.println("5. Modo sequência");
+        output.println("6. Ver recordes");
         output.print("Escolha uma opção: ");
     }
 }

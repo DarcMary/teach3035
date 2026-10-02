@@ -33,7 +33,7 @@ public class GameFlowTest {
 
     private static void retriesInvalidMainMenuInput() {
         String output = runGame("texto\n9\n4\n");
-        assertContains(output, "Digite um número inteiro entre 1 e 5.");
+        assertContains(output, "Digite um número inteiro entre 1 e 6.");
         assertContains(output, "Até a próxima!");
     }
 

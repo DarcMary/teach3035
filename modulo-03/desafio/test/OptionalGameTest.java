@@ -12,7 +12,38 @@ public class OptionalGameTest {
         proximityRequiresPreviousGuess();
         hintsRejectInsufficientPoints();
         sequenceResetsHintsBetweenNumbers();
+        recordsWinsButNotLossesAndSurvivesHistoryEviction();
+        menuSupportsBothModesAndRecords();
         System.out.println("OptionalGameTest: PASS");
+    }
+
+    private static void recordsWinsButNotLossesAndSurvivesHistoryEviction() {
+        Fixture winner = new Fixture("5\n", 5);
+        winner.game.playRound(0);
+        equals(540, winner.records.best(HighScores.CLASSIC, 0));
+        for (int i = 0; i < 11; i++) {
+            winner.history.add("Médio", 0);
+        }
+        equals(540, winner.records.best(HighScores.CLASSIC, 0));
+        Fixture loser = new Fixture("1\n".repeat(10), 5);
+        loser.game.playRound(0);
+        equals(-1, loser.records.best(HighScores.CLASSIC, 0));
+        Fixture lastAttempt = new Fixture("1\n".repeat(9) + "5\n", 5);
+        lastAttempt.game.playRound(0);
+        equals(0, lastAttempt.records.best(HighScores.CLASSIC, 0));
+        Fixture sequence = new Fixture("5\n8\n2\n", 5, 8, 2);
+        sequence.game.playSequence(0);
+        equals(1620, sequence.records.best(HighScores.SEQUENCE, 0));
+        equals(-1, sequence.records.best(HighScores.CLASSIC, 0));
+    }
+
+    private static void menuSupportsBothModesAndRecords() {
+        Fixture fixture = new Fixture("6\n1\n1\n5\n5\n2\n8\n8\n8\n3\n6\n4\n", 5, 8, 8, 8);
+        fixture.game.run();
+        contains(fixture.output(), "Sequência concluída!");
+        contains(fixture.output(), "Fácil: 540 pontos");
+        contains(fixture.output(), "Médio: 1470 pontos");
+        contains(fixture.output(), "Até a próxima!");
     }
 
     private static void hintsChargeOnceWithoutUsingAttempts() {
@@ -86,11 +117,12 @@ public class OptionalGameTest {
     static class Fixture {
         final ByteArrayOutputStream output = new ByteArrayOutputStream();
         final ScoreHistory history = new ScoreHistory();
+        final HighScores records = new HighScores();
         final GuessingGame game;
 
         Fixture(String input, int... targets) {
             game = new GuessingGame(new Scanner(input), new TargetRandom(targets),
-                    new PrintStream(output, true, StandardCharsets.UTF_8), history);
+                    new PrintStream(output, true, StandardCharsets.UTF_8), history, records);
         }
 
         String output() {
