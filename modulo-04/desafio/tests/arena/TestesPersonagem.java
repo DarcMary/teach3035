@@ -1,6 +1,9 @@
 package arena;
 
 import arena.personagem.Personagem;
+import arena.personagem.Guerreiro;
+import arena.personagem.Mago;
+import arena.personagem.Arqueiro;
 
 public class TestesPersonagem {
     public static void main(String[] args) {
@@ -47,6 +50,17 @@ public class TestesPersonagem {
         esperarInvalido(() -> new Personagem("Ana", 100, 1, 0, -1));
         esperarInvalido(() -> resistente.melhorarAtaque(0));
         esperarInvalido(() -> resistente.melhorarVida(-1));
+        Personagem[] classes = {new Guerreiro("Ana"), new Mago("Bia"), new Arqueiro("Caio")};
+        int[][] esperados = {{100, 22, 8}, {80, 28, 4}, {90, 25, 6}};
+        for (int i = 0; i < classes.length; i++) {
+            assert classes[i].getVida() == esperados[i][0];
+            assert classes[i].getAtaque() == esperados[i][1];
+            assert classes[i].getDefesa() == esperados[i][2];
+            assert classes[i].getPocoes() == 3;
+            assert !classes[i].getDescricao().equals("Combatente da arena.");
+        }
+        classes[0].melhorarAtaque(3);
+        assert classes[1].getAtaque() == 28 && classes[2].getAtaque() == 25;
         System.out.println("OK: TestesPersonagem");
     }
 
