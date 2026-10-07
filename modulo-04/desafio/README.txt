@@ -21,11 +21,6 @@ COMPILAR E JOGAR
   javac -encoding UTF-8 -d out @fontes.txt
   java -cp out arena.Main
 
-Ambiente usado na implementação: Temurin JDK 17 temporário, sem instalação no
-sistema. Enquanto essa pasta temporária existir, é possível usá-lo nesta sessão:
-  export PATH="/private/tmp/arena-jdk17/jdk-17.0.20.1+1/Contents/Home/bin:$PATH"
-Depois execute os comandos acima. Outra instalação de JDK 17 também funciona.
-
 COMO JOGAR
 ----------
 Menu inicial:
@@ -118,15 +113,7 @@ src/arena/loja/             Compras e menu da loja.
 src/arena/ranking/          Pontuações e classificação da sessão.
 src/arena/utilitarios/     Entrada validada usando um Scanner compartilhado.
 tests/arena/                Verificações executáveis, sem dependências externas.
-docs/superpowers/plans/     Plano de implementação e matriz de requisitos.
 
 Comentários no código explicam as regras de defesa, cura, recompensas e EOF.
 Arquivos compilados e listas temporárias de fontes são ignorados pelo Git.
 Print ou vídeo da execução é uma evidência opcional no enunciado.
-
-PADRÃO DOS COMMITS
-------------------
-Conventional Commits, com assunto em inglês, por etapa testada:
-  feat: add character combat rules
-  feat: implement turn-based battles
-  docs: document game rules and execution
