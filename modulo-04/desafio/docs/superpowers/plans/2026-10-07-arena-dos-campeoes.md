@@ -158,7 +158,7 @@ Compilar somente arquivos já criados em cada etapa. No teste inicial, a falta d
 
 **Consome:** nenhum componente anterior. **Produz:** todos os contratos de `Personagem`, utilizados por subclasses, batalha e loja.
 
-- [ ] Criar testes para redução de vida, dano mínimo, vida zero, defesa temporária e limite de cura. Este caso base pode ser copiado integralmente para o teste:
+- [x] Criar testes para redução de vida, dano mínimo, vida zero, defesa temporária e limite de cura. Este caso base pode ser copiado integralmente para o teste:
 
 ```java
 package arena;
@@ -195,11 +195,11 @@ public class TestesPersonagem {
 }
 ```
 
-- [ ] Compilar e executar `arena.TestesPersonagem`; confirmar falha antes da implementação.
-- [ ] Implementar campos privados, construtor e operações. Em `tomarDano`, ignorar dano bruto não positivo e golpes contra personagem morto; calcular `max(1, dano - defesa)`, aplicar defesa ativa, limitar o dano à vida restante e desativar a defesa consumida. `iniciarTurno` desativa defesa remanescente.
-- [ ] Implementar cura conforme as regras e melhorias com bônus estritamente positivo. `melhorarVida(15)` aumenta máximo e vida atual em 15; `melhorarAtaque(3)` aumenta ataque em 3. Rejeitar bônus inválidos com `IllegalArgumentException`.
-- [ ] Acrescentar cenários separados: ataque 1 contra defesa 8 causa 1; dano negativo não cura; poção em vida cheia não é consumida; dano ímpar 15 defendido causa 8; construções com nome vazio ou atributos inválidos são rejeitadas.
-- [ ] Executar os testes; aceitar somente com `OK: TestesPersonagem` e código 0.
+- [x] Compilar e executar `arena.TestesPersonagem`; confirmar falha antes da implementação.
+- [x] Implementar campos privados, construtor e operações. Em `tomarDano`, ignorar dano bruto não positivo e golpes contra personagem morto; calcular `max(1, dano - defesa)`, aplicar defesa ativa, limitar o dano à vida restante e desativar a defesa consumida. `iniciarTurno` desativa defesa remanescente.
+- [x] Implementar cura conforme as regras e melhorias com bônus estritamente positivo. `melhorarVida(15)` aumenta máximo e vida atual em 15; `melhorarAtaque(3)` aumenta ataque em 3. Rejeitar bônus inválidos com `IllegalArgumentException`.
+- [x] Acrescentar cenários separados: ataque 1 contra defesa 8 causa 1; dano negativo não cura; poção em vida cheia não é consumida; dano ímpar 15 defendido causa 8; construções com nome vazio ou atributos inválidos são rejeitadas.
+- [x] Executar os testes; aceitar somente com `OK: TestesPersonagem` e código 0.
 
 ### Tarefa 2 - Classes jogáveis e seleção com descrição
 
@@ -207,10 +207,10 @@ public class TestesPersonagem {
 
 **Consome:** construtor e regras de `Personagem`. **Produz:** heróis disponíveis para a seleção, com atributos distintos e descrição polimórfica.
 
-- [ ] Acrescentar teste instanciando cada classe; verificar a tabela de atributos, 3 poções e descrição não vazia. Referenciar as instâncias pelo tipo `Personagem` para verificar o uso da hierarquia.
-- [ ] Executar `arena.TestesPersonagem` e confirmar falha antes de implementar as subclasses.
-- [ ] Implementar os três construtores com `super(nome, vida, ataque, defesa, 3)` e sobrescrever `getDescricao()` com as descrições da tabela.
-- [ ] Executar `arena.TestesPersonagem`; verificar que alterar uma classe não altera os atributos das outras instâncias.
+- [x] Acrescentar teste instanciando cada classe; verificar a tabela de atributos, 3 poções e descrição não vazia. Referenciar as instâncias pelo tipo `Personagem` para verificar o uso da hierarquia.
+- [x] Executar `arena.TestesPersonagem` e confirmar falha antes de implementar as subclasses.
+- [x] Implementar os três construtores com `super(nome, vida, ataque, defesa, 3)` e sobrescrever `getDescricao()` com as descrições da tabela.
+- [x] Executar `arena.TestesPersonagem`; verificar que alterar uma classe não altera os atributos das outras instâncias.
 
 ### Tarefa 3 - Entrada de terminal segura
 
@@ -218,11 +218,11 @@ public class TestesPersonagem {
 
 **Consome:** `Scanner` e `PrintStream`. **Produz:** leitura validada compartilhada por todos os menus.
 
-- [ ] Escrever testes com `new Scanner("abc\n0\n9\n2\n")` e chamar `lerOpcao("Classe: ", 1, 3)`: deve devolver 2, exibindo erro para as três entradas anteriores. Testar texto vazio, espaços, inteiro além do limite de `int`, número decimal e fim da entrada.
-- [ ] Executar `arena.TestesEntradaConsole`; confirmar falha inicial.
-- [ ] Ler sempre com `hasNextLine()`/`nextLine()` e aplicar `trim()`. Converter a opção usando `Integer.parseInt`, capturar `NumberFormatException` e repetir enquanto estiver fora da faixa. Evitar misturar `nextInt()` com `nextLine()`.
-- [ ] Retornar `Optional.empty()`/`OptionalInt.empty()` no fim da entrada. A camada do jogo decide o encerramento; o leitor não encerra o processo nem inventa uma ação.
-- [ ] Executar `arena.TestesEntradaConsole`; aceitar sem exceções não tratadas e com retorno vazio no fim da entrada.
+- [x] Escrever testes com `new Scanner("abc\n0\n9\n2\n")` e chamar `lerOpcao("Classe: ", 1, 3)`: deve devolver 2, exibindo erro para as três entradas anteriores. Testar texto vazio, espaços, inteiro além do limite de `int`, número decimal e fim da entrada.
+- [x] Executar `arena.TestesEntradaConsole`; confirmar falha inicial.
+- [x] Ler sempre com `hasNextLine()`/`nextLine()` e aplicar `trim()`. Converter a opção usando `Integer.parseInt`, capturar `NumberFormatException` e repetir enquanto estiver fora da faixa. Evitar misturar `nextInt()` com `nextLine()`.
+- [x] Retornar `Optional.empty()`/`OptionalInt.empty()` no fim da entrada. A camada do jogo decide o encerramento; o leitor não encerra o processo nem inventa uma ação.
+- [x] Executar `arena.TestesEntradaConsole`; aceitar sem exceções não tratadas e com retorno vazio no fim da entrada.
 
 ### Tarefa 4 - Inimigos aleatórios e IA
 
@@ -230,11 +230,11 @@ public class TestesPersonagem {
 
 **Consome:** `Personagem` e `Random`. **Produz:** inimigos para as batalhas 1 a 5; a política de decisão será aplicada em `Batalha` na tarefa 6.
 
-- [ ] Criar duas fábricas com `new Random(42)` e gerar a mesma sequência: os nomes e atributos devem coincidir par a par. Verificar faixas de vida, ataque e defesa para todas as cinco batalhas, e ausência de poções.
-- [ ] Testar números de batalha 0 e 6, esperando `IllegalArgumentException`.
-- [ ] Executar `arena.TestesFabricaInimigos`; confirmar falha inicial.
-- [ ] Implementar catálogo e fórmulas da seção 3, usando apenas o `Random` recebido. Cada chamada cria outra instância; nunca reutilizar um inimigo já ferido.
-- [ ] Executar `arena.TestesFabricaInimigos`; verificar também que uma sequência longa com semente fixa apresenta mais de um nome e mais de um conjunto de atributos.
+- [x] Criar duas fábricas com `new Random(42)` e gerar a mesma sequência: os nomes e atributos devem coincidir par a par. Verificar faixas de vida, ataque e defesa para todas as cinco batalhas, e ausência de poções.
+- [x] Testar números de batalha 0 e 6, esperando `IllegalArgumentException`.
+- [x] Executar `arena.TestesFabricaInimigos`; confirmar falha inicial.
+- [x] Implementar catálogo e fórmulas da seção 3, usando apenas o `Random` recebido. Cada chamada cria outra instância; nunca reutilizar um inimigo já ferido.
+- [x] Executar `arena.TestesFabricaInimigos`; verificar também que uma sequência longa com semente fixa apresenta mais de um nome e mais de um conjunto de atributos.
 
 ### Tarefa 5 - Estado da partida e recompensas
 
@@ -242,11 +242,11 @@ public class TestesPersonagem {
 
 **Consome:** um `Personagem` selecionado. **Produz:** contadores e saldo compartilhados por batalha, loja e campanha.
 
-- [ ] Escrever teste: novo estado começa com zero batalhas, turnos, vitórias, pontos e moedas. Registrar uma batalha, um turno e uma vitória deve resultar em 1, 1, 1, 10 e 20, respectivamente.
-- [ ] Testar `gastarMoedas(20)` com saldo 0 e depois com saldo 20; saldo insuficiente retorna `false` sem alteração, saldo suficiente retorna `true` e zera moedas. Valores não positivos são rejeitados.
-- [ ] Executar `arena.TestesEstadoPartida`; confirmar falha inicial.
-- [ ] Implementar contadores privados e métodos do contrato. `registrarVitoria()` incrementa derrotados, pontos e moedas juntos. Somente a campanha chama esse método, uma vez por resultado de vitória; a batalha não concede recompensa.
-- [ ] Executar `arena.TestesEstadoPartida`; verificar que criar outro estado não reutiliza contadores ou saldo.
+- [x] Escrever teste: novo estado começa com zero batalhas, turnos, vitórias, pontos e moedas. Registrar uma batalha, um turno e uma vitória deve resultar em 1, 1, 1, 10 e 20, respectivamente.
+- [x] Testar `gastarMoedas(20)` com saldo 0 e depois com saldo 20; saldo insuficiente retorna `false` sem alteração, saldo suficiente retorna `true` e zera moedas. Valores não positivos são rejeitados.
+- [x] Executar `arena.TestesEstadoPartida`; confirmar falha inicial.
+- [x] Implementar contadores privados e métodos do contrato. `registrarVitoria()` incrementa derrotados, pontos e moedas juntos. Somente a campanha chama esse método, uma vez por resultado de vitória; a batalha não concede recompensa.
+- [x] Executar `arena.TestesEstadoPartida`; verificar que criar outro estado não reutiliza contadores ou saldo.
 
 ### Tarefa 6 - Uma batalha completa por turnos
 
@@ -254,7 +254,7 @@ public class TestesPersonagem {
 
 **Consome:** personagens, entrada validada, `Random` e `EstadoPartida`. **Produz:** resultado da batalha sem registrar pontuação ou abrir loja.
 
-- [ ] Criar testes com entrada e saída em memória. Para controlar a IA, usar este substituto de `Random` nos testes:
+- [x] Criar testes com entrada e saída em memória. Para controlar a IA, usar este substituto de `Random` nos testes:
 
 ```java
 Random sempreAtaca = new Random() {
@@ -265,11 +265,11 @@ Random sempreDefende = new Random() {
 };
 ```
 
-- [ ] Testar golpe fatal com herói de ataque 100 e inimigo de vida 10: entrada `1\n` retorna `VITORIA` e mantém a vida do herói. Testar inimigo de ataque 999: após um ataque não fatal do jogador, retorna `DERROTA` e vida zero.
-- [ ] Testar sequência `texto\n9\n3\n1\n` com herói em vida cheia: texto, opção 9 e poção recusada não geram turno inimigo. Testar fim da entrada antes de uma ação válida: retorna `INTERROMPIDA`.
-- [ ] Executar `arena.TestesBatalha`; confirmar falha inicial.
-- [ ] Implementar status com rodada, progresso da batalha, nomes, vida atual/máxima e poções restantes; mostrar ações `1 - Atacar`, `2 - Defender`, `3 - Usar poção` em todo turno.
-- [ ] Implementar o fluxo abaixo; o contador de turnos aumenta somente quando a ação do jogador é executada:
+- [x] Testar golpe fatal com herói de ataque 100 e inimigo de vida 10: entrada `1\n` retorna `VITORIA` e mantém a vida do herói. Testar inimigo de ataque 999: após um ataque não fatal do jogador, retorna `DERROTA` e vida zero.
+- [x] Testar sequência `texto\n9\n3\n1\n` com herói em vida cheia: texto, opção 9 e poção recusada não geram turno inimigo. Testar fim da entrada antes de uma ação válida: retorna `INTERROMPIDA`.
+- [x] Executar `arena.TestesBatalha`; confirmar falha inicial.
+- [x] Implementar status com rodada, progresso da batalha, nomes, vida atual/máxima e poções restantes; mostrar ações `1 - Atacar`, `2 - Defender`, `3 - Usar poção` em todo turno.
+- [x] Implementar o fluxo abaixo; o contador de turnos aumenta somente quando a ação do jogador é executada:
 
 ```text
 registrar início da batalha
@@ -286,8 +286,8 @@ enquanto jogador e inimigo estiverem vivos:
     se jogador morreu: retornar DERROTA
 ```
 
-- [ ] Testar defesa dos dois lados e poção seguida por ação inimiga. Uma recusa de poção apenas repete a leitura: não chama `iniciarTurno` novamente nem altera contadores.
-- [ ] Executar `arena.TestesBatalha`; verificar status e mensagens na saída capturada e resultados para os dois ramos de IA. Testar a fronteira 79/80 com `Random` controlado; evitar testes estatísticos instáveis.
+- [x] Testar defesa dos dois lados e poção seguida por ação inimiga. Uma recusa de poção apenas repete a leitura: não chama `iniciarTurno` novamente nem altera contadores.
+- [x] Executar `arena.TestesBatalha`; verificar status e mensagens na saída capturada e resultados para os dois ramos de IA. Testar a fronteira 79/80 com `Random` controlado; evitar testes estatísticos instáveis.
 
 ### Tarefa 7 - Loja entre batalhas
 
@@ -295,12 +295,12 @@ enquanto jogador e inimigo estiverem vivos:
 
 **Consome:** `EstadoPartida`, operações de melhoria de `Personagem` e entrada validada. **Produz:** compras consistentes e retorno ao fluxo da campanha.
 
-- [ ] Escrever teste com `new Guerreiro("Ana")`: sem recompensa, comprar ataque retorna `false`; após `registrarVitoria`, retorna `true`, ataque passa de 22 para 25 e moedas ficam em 0.
-- [ ] Escrever teste de vida: após dano bruto 38, vida do guerreiro é 70; depois de uma vitória e compra, vida máxima é 115, vida atual 85 e saldo 0. As poções continuam em 3.
-- [ ] Executar `arena.TestesLoja`; confirmar falha inicial.
-- [ ] Implementar `comprarAtaque` e `comprarVida`: verificar e debitar as 20 moedas antes de aplicar o bônus fixo. Saldo insuficiente retorna `false` sem melhorar o personagem.
-- [ ] Implementar menu `1 - +3 ataque (20 moedas)`, `2 - +15 vida máxima (20 moedas)`, `0 - Continuar`, exibindo saldo e atributos. Repetir após compra ou recusa, até continuar ou acabar a entrada.
-- [ ] Executar `arena.TestesLoja`; testar compra repetida sem saldo, opção inválida, continuidade e fim da entrada.
+- [x] Escrever teste com `new Guerreiro("Ana")`: sem recompensa, comprar ataque retorna `false`; após `registrarVitoria`, retorna `true`, ataque passa de 22 para 25 e moedas ficam em 0.
+- [x] Escrever teste de vida: após dano bruto 38, vida do guerreiro é 70; depois de uma vitória e compra, vida máxima é 115, vida atual 85 e saldo 0. As poções continuam em 3.
+- [x] Executar `arena.TestesLoja`; confirmar falha inicial.
+- [x] Implementar `comprarAtaque` e `comprarVida`: verificar e debitar as 20 moedas antes de aplicar o bônus fixo. Saldo insuficiente retorna `false` sem melhorar o personagem.
+- [x] Implementar menu `1 - +3 ataque (20 moedas)`, `2 - +15 vida máxima (20 moedas)`, `0 - Continuar`, exibindo saldo e atributos. Repetir após compra ou recusa, até continuar ou acabar a entrada.
+- [x] Executar `arena.TestesLoja`; testar compra repetida sem saldo, opção inválida, continuidade e fim da entrada.
 
 ### Tarefa 8 - Pontuação e ranking
 
@@ -308,12 +308,12 @@ enquanto jogador e inimigo estiverem vivos:
 
 **Consome:** nome e pontos de partidas concluídas. **Produz:** melhores pontuações por nome e listagem ordenada no menu principal.
 
-- [ ] Escrever teste com registros `Ana=20`, `Bruno=30`, `Ana=10`, `Ana=40`: mapa final deve conter `Ana=40` e `Bruno=30`. Empate `Carlos=30` deve listar Bruno antes de Carlos.
-- [ ] Testar ranking vazio e proteção do mapa: modificar a cópia devolvida por `getPontuacoes()` não modifica o ranking interno.
-- [ ] Executar `arena.TestesRanking`; confirmar falha inicial.
-- [ ] Implementar mapa privado, normalização por `trim()` e `merge(nome, pontos, Math::max)`. Rejeitar nome vazio e pontuação negativa.
-- [ ] Ordenar as entradas por valor decrescente e chave crescente para exibição. Não depender da ordem de iteração de um `HashMap`.
-- [ ] Executar `arena.TestesRanking`; aceitar mensagens de vazio e ordenação estável nos empates.
+- [x] Escrever teste com registros `Ana=20`, `Bruno=30`, `Ana=10`, `Ana=40`: mapa final deve conter `Ana=40` e `Bruno=30`. Empate `Carlos=30` deve listar Bruno antes de Carlos.
+- [x] Testar ranking vazio e proteção do mapa: modificar a cópia devolvida por `getPontuacoes()` não modifica o ranking interno.
+- [x] Executar `arena.TestesRanking`; confirmar falha inicial.
+- [x] Implementar mapa privado, normalização por `trim()` e `merge(nome, pontos, Math::max)`. Rejeitar nome vazio e pontuação negativa.
+- [x] Ordenar as entradas por valor decrescente e chave crescente para exibição. Não depender da ordem de iteração de um `HashMap`.
+- [x] Executar `arena.TestesRanking`; aceitar mensagens de vazio e ordenação estável nos empates.
 
 ### Tarefa 9 - Campanha, menus e integração dos bônus
 
@@ -321,7 +321,7 @@ enquanto jogador e inimigo estiverem vivos:
 
 **Consome:** todos os componentes anteriores. **Produz:** jogo completo, múltiplas partidas e encerramento coerente.
 
-- [ ] Criar testes de integração com `Scanner` sobre texto, `ByteArrayOutputStream` e fábrica controlada. A fábrica pode ser substituída assim para garantir inimigos derrotados em um golpe:
+- [x] Criar testes de integração com `Scanner` sobre texto, `ByteArrayOutputStream` e fábrica controlada. A fábrica pode ser substituída assim para garantir inimigos derrotados em um golpe:
 
 ```java
 FabricaInimigos fabricaFacil = new FabricaInimigos(new Random(0)) {
@@ -331,20 +331,20 @@ FabricaInimigos fabricaFacil = new FabricaInimigos(new Random(0)) {
 };
 ```
 
-- [ ] Executar uma partida completa com esta entrada: jogar, nome, guerreiro, cinco ataques, quatro saídas da loja, ranking e saída. O teste espera 5 inimigos derrotados, 50 pontos, ranking `Ana=50`, quatro visitas à loja e uma única mensagem de vitória final:
+- [x] Executar uma partida completa com esta entrada: jogar, nome, guerreiro, cinco ataques, quatro saídas da loja, ranking e saída. O teste espera 5 inimigos derrotados, 50 pontos, ranking `Ana=50`, quatro visitas à loja e uma única mensagem de vitória final:
 
 ```java
 String entradas = "1\nAna\n1\n1\n0\n1\n0\n1\n0\n1\n0\n1\n2\n0\n";
 ```
 
-- [ ] Acrescentar teste com inimigo de vida 999 e ataque 999: derrota na primeira batalha, nenhuma loja, nenhuma segunda batalha e ranking com zero pontos. Testar também derrota depois de uma vitória: ranking mantém 10 pontos e não concede outra recompensa.
-- [ ] Executar `arena.TestesJogo`; confirmar falha inicial.
-- [ ] Implementar `iniciarJogo()` com menu iterativo. Em seleção, mostrar nome, descrição e atributos de cada classe; validar opção antes de criar o herói. Criar novo `EstadoPartida` para cada tentativa.
-- [ ] Implementar campanha: para batalhas 1 a 5, criar inimigo e executar batalha; em vitória registrar recompensa uma vez e abrir loja somente se houver próxima batalha; em derrota chamar `fimDeJogo` e retornar ao menu; em interrupção encerrar toda a execução.
-- [ ] Implementar `fimDeJogo`: vitória ou derrota, batalhas iniciadas, inimigos derrotados, turnos, vida, poções usadas/restantes, pontos e moedas. Registrar ranking uma vez ao terminar por vitória ou derrota.
-- [ ] Em `Main`, criar um `Scanner(System.in)` e componentes compartilhados. O mesmo `Ranking` permanece durante todas as partidas; o `Scanner` não é fechado pelas telas.
-- [ ] Executar `arena.TestesJogo`; testar duas partidas seguidas, nome vazio, classes inválidas, ranking antes de jogar, fim de entrada na seleção/loja/batalha, preservação de vida e poções entre batalhas e reinicialização em nova partida.
-- [ ] Jogar manualmente com cada classe e conferir se a dificuldade permite escolhas úteis de cura e loja. Se ajustar os números propostos, atualizar tabela, descrições e testes juntos, mantendo os valores exigidos de 20 de cura e 3 poções.
+- [x] Acrescentar teste com inimigo de vida 999 e ataque 999: derrota na primeira batalha, nenhuma loja, nenhuma segunda batalha e ranking com zero pontos. Testar também derrota depois de uma vitória: ranking mantém 10 pontos e não concede outra recompensa.
+- [x] Executar `arena.TestesJogo`; confirmar falha inicial.
+- [x] Implementar `iniciarJogo()` com menu iterativo. Em seleção, mostrar nome, descrição e atributos de cada classe; validar opção antes de criar o herói. Criar novo `EstadoPartida` para cada tentativa.
+- [x] Implementar campanha: para batalhas 1 a 5, criar inimigo e executar batalha; em vitória registrar recompensa uma vez e abrir loja somente se houver próxima batalha; em derrota chamar `fimDeJogo` e retornar ao menu; em interrupção encerrar toda a execução.
+- [x] Implementar `fimDeJogo`: vitória ou derrota, batalhas iniciadas, inimigos derrotados, turnos, vida, poções usadas/restantes, pontos e moedas. Registrar ranking uma vez ao terminar por vitória ou derrota.
+- [x] Em `Main`, criar um `Scanner(System.in)` e componentes compartilhados. O mesmo `Ranking` permanece durante todas as partidas; o `Scanner` não é fechado pelas telas.
+- [x] Executar `arena.TestesJogo`; testar duas partidas seguidas, nome vazio, classes inválidas, ranking antes de jogar, fim de entrada na seleção/loja/batalha, preservação de vida e poções entre batalhas e reinicialização em nova partida.
+- [x] Jogar manualmente com cada classe e conferir se a dificuldade permite escolhas úteis de cura e loja. Se ajustar os números propostos, atualizar tabela, descrições e testes juntos, mantendo os valores exigidos de 20 de cura e 3 poções.
 
 ### Tarefa 10 - Documentação e entrega final
 
@@ -352,10 +352,10 @@ String entradas = "1\nAna\n1\n1\n0\n1\n0\n1\n0\n1\n0\n1\n2\n0\n";
 
 **Consome:** jogo integrado. **Produz:** entrega reproduzível conforme a página 8 do PDF.
 
-- [ ] Documentar JDK necessário, árvore de pacotes, comandos abaixo, menu, atributos das classes, ações, duração da defesa, campanha, limite de poções, pontuação, loja e duração do ranking em memória.
-- [ ] Incluir comandos de execução dos testes com `-ea` e exemplos de entrada inválida tratados. Explicar que a vida e as poções persistem entre batalhas e que nova partida reinicia os atributos.
-- [ ] Acrescentar comentários explicativos nas regras de dano/defesa, duração do efeito, limite da cura, concessão de recompensas e tratamento de fim da entrada. Evitar comentários que apenas repitam instruções triviais.
-- [ ] Compilar a aplicação seguindo exatamente as instruções que serão entregues:
+- [x] Documentar JDK necessário, árvore de pacotes, comandos abaixo, menu, atributos das classes, ações, duração da defesa, campanha, limite de poções, pontuação, loja e duração do ranking em memória.
+- [x] Incluir comandos de execução dos testes com `-ea` e exemplos de entrada inválida tratados. Explicar que a vida e as poções persistem entre batalhas e que nova partida reinicia os atributos.
+- [x] Acrescentar comentários explicativos nas regras de dano/defesa, duração do efeito, limite da cura, concessão de recompensas e tratamento de fim da entrada. Evitar comentários que apenas repitam instruções triviais.
+- [x] Compilar a aplicação seguindo exatamente as instruções que serão entregues:
 
 ```sh
 mkdir -p out
@@ -364,7 +364,7 @@ javac -encoding UTF-8 -d out @fontes.txt
 java -cp out arena.Main
 ```
 
-- [ ] Compilar aplicação e testes e executar todas as verificações:
+- [x] Compilar aplicação e testes e executar todas as verificações:
 
 ```sh
 find src tests -name '*.java' > fontes-testes.txt
@@ -379,9 +379,9 @@ java -ea -cp out arena.TestesRanking
 java -ea -cp out arena.TestesJogo
 ```
 
-- [ ] Confirmar código 0 em cada comando e mensagem `OK` em cada classe de teste; conferir manualmente uma vitória completa, uma derrota e um encerramento normal pelo menu.
-- [ ] Se desejado, registrar um print ou vídeo da execução. Essa evidência é opcional no PDF e não substitui o código nem o `README.txt`.
-- [ ] Revisar o estado do Git, incluir somente arquivos do desafio e criar commits por entregas verificadas. Mensagens sugeridas: `feat: add character combat rules`, `feat: add turn-based battles`, `feat: add campaign and optional challenges`, `docs: add game execution instructions`.
+- [x] Confirmar código 0 em cada comando e mensagem `OK` em cada classe de teste; conferir manualmente uma vitória completa, uma derrota e um encerramento normal pelo menu.
+- [x] Avaliar print ou vídeo da execução. Decisão: não produzir essa evidência opcional; a execução real no terminal foi verificada com as três classes. Isso não substitui o código nem o `README.txt`.
+- [x] Revisar o estado do Git, incluir somente arquivos do desafio e criar commits por entregas verificadas. Mensagens sugeridas: `feat: add character combat rules`, `feat: add turn-based battles`, `feat: add campaign and optional challenges`, `docs: add game execution instructions`.
 
 ## 6. Matriz de cobertura do enunciado
 
@@ -417,4 +417,15 @@ java -ea -cp out arena.TestesJogo
 
 O projeto poderá ser considerado entregue quando todos os itens obrigatórios e os cinco bônus da matriz tiverem evidência de funcionamento, os testes terminarem sem falhas, as três classes forem jogáveis e os comandos do `README.txt` funcionarem a partir da pasta do desafio. Ajustes de equilíbrio são permitidos nas decisões propostas, mas não podem remover requisitos ou alterar as três poções de cura de 20 previstas no enunciado.
 
-**Estado deste documento:** plano preparado para revisão; implementação e testes Java ainda não executados.
+**Estado deste documento:** implementação concluída e verificada em 07/10/2026.
+
+### Resultado da execução
+
+- Todas as dez tarefas foram executadas, incluindo os cinco bônus.
+- As oito classes de testes passaram com asserções ativadas (`-ea`).
+- Compilação com JDK 17 e `-Xlint:all` sem avisos.
+- Execução real no terminal: Guerreiro, Mago e Arqueiro venceram as cinco batalhas usando ataque, cura e compras de vida; o menu de ranking e a saída normal também foram conferidos.
+- Revisão independente de código sem problemas bloqueantes.
+- `README.txt` contém comandos verificados, regras e configuração do JDK temporário usado neste ambiente.
+- Commits no padrão Conventional Commits, todos com assunto em inglês, na branch `codex/modulo-04-arena-campeoes`.
+- Nenhuma instalação permanente de Java foi realizada; a validação usou um JDK em `/private/tmp`.
